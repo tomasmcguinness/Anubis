@@ -10,10 +10,11 @@ namespace Anubis.Web.Entities
     {
         public LogEntity(int ownerId, string applicationName)
         {
-            this.PartitionKey = ownerId.ToString();
-            this.RowKey = applicationName;
+            this.PartitionKey = applicationName;
+            this.RowKey = string.Format("{0}-{1}", ownerId, DateTime.UtcNow.Ticks);
         }
 
+        public string LogLevel { get; set; }
         public string Message { get; set; }
     }
 }

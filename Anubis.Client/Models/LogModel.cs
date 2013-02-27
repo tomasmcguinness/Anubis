@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Anubis.Web.Models
+namespace Anubis.Client.Models
 {
     public class LogModel
     {

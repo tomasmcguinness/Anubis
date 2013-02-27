@@ -23,19 +23,23 @@ namespace Anubis.Web.Managers
 
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
-            tableClient.CreateTableIfNotExist("1");
+            string tableName = string.Format("logs{0}", ownerId);
+
+            tableClient.CreateTableIfNotExist(tableName);
 
             TableServiceContext serviceContext = tableClient.GetDataServiceContext();
 
             // Create a new customer entity
             LogEntity customer1 = new LogEntity(ownerId, applicationName);
             customer1.Message = log.Message;
+            customer1.Timestamp = DateTime.UtcNow;
+            customer1.LogLevel = log.Level;
 
             // Add the new customer to the people table
-            serviceContext.AddObject("1", customer1);
+            serviceContext.AddObject(tableName, customer1);
 
             // Submit the operation to the table service
-            serviceContext.SaveChangesWithRetries();
+            serviceContext.SaveChanges();
         }
     }
 }

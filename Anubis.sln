@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anubis.Web", "Anubis.Web\An
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anubis.Web.Tests", "Anubis.Web.Tests\Anubis.Web.Tests.csproj", "{85E40211-03C2-430D-AC7F-63AA56BA30C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anubis.Client", "..\Anubis.Client\Anubis.Client.csproj", "{750E35A3-2E64-45BB-8831-9EEACF576A04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anubis.Client", "Anubis.Client\Anubis.Client.csproj", "{750E35A3-2E64-45BB-8831-9EEACF576A04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

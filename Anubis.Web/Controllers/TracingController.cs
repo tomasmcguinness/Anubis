@@ -21,10 +21,10 @@ namespace Anubis.Web.Controllers
             userManager = new UserManager();
         }
 
-        public HttpResponseMessage Post(string code, string application, LogModel log)
+        public HttpResponseMessage Post(string code, string applicationName, LogModel log)
         {
             int userId = userManager.GetUserAccountForCode(code);
-            logManager.RecordLogMessage(userId, application, log);
+            logManager.RecordLogMessage(userId, applicationName, log);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
