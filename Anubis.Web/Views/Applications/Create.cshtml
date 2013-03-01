@@ -8,8 +8,12 @@
     <button class="btn"></button>
 }
 
-@using(Html.BeginForm())
+@using (Html.BeginForm())
 {
-    @Html.LabelFor(m => m.ApplicationName)
-    @Html.TextBoxFor(m => m.ApplicationName)
+    <p>
+        @Html.LabelFor(m => m.ApplicationName)
+        @Html.TextBoxFor(m => m.ApplicationName)
+    </p>
+    <button class="btn">Save</button>
+    <button class="btn">Cancel</button>
 }

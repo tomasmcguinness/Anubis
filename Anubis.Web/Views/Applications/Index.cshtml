@@ -1,10 +1,25 @@
-﻿@{
+﻿@model System.Collections.Generic.List<Anubis.Web.Models.ApplicationModel>
+@{
     ViewBag.Title = "Applications";
     Layout = "~/Views/Shared/_WideLayout.cshtml";
 }
 @section BarButton
 {
-    <a class="btn btn-primary" href="@Url.Action("Create")">
-        Create New Application
+    <a class="btn btn-primary" href="@Url.Action("Create")">Create New Application
     </a>
 }
+<p>All of your applications are listed here.</p>
+<table class="table table-bordered">
+    <tr>
+        <th>Application Name</th>
+        <th>Code</th>
+    </tr>
+    @foreach (var app in Model)
+    {
+        <tr>
+            <td>@app.Name</td>
+            <td></td>
+        </tr>
+    }
+</table>
+

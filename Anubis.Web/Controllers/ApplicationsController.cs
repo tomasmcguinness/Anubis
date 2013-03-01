@@ -1,4 +1,5 @@
-﻿using Anubis.Web.Models;
+﻿using Anubis.Web.Managers;
+using Anubis.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,12 @@ namespace Anubis.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            ApplicationManager manager = new ApplicationManager();
+            var apps = manager.GetApplications();
+
+            var appModels = apps.Select(s => new ApplicationModel() { Name = s.Name }).ToList();
+
+            return View(appModels);
         }
 
         public ActionResult Create()
@@ -22,7 +28,14 @@ namespace Anubis.Web.Controllers
         [HttpPost]
         public ActionResult Create(CreateApplicationModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                ApplicationManager manager = new ApplicationManager();
+                manager.CreateApplication(model.ApplicationName);
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
         }
     }
 }
