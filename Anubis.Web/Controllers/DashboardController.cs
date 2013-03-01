@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Anubis.Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class DashboardController : Controller
     {
         public ActionResult Index()

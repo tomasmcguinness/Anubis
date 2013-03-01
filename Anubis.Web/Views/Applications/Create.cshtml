@@ -1,0 +1,10 @@
+﻿@model Anubis.Web.Models.CreateApplicationModel
+@{
+    ViewBag.Title = "Create New Application";
+    Layout = "~/Views/Shared/_WideLayout.cshtml";
+}
+@using(Html.BeginForm())
+{
+    @Html.LabelFor(m => m.ApplicationName)
+    @Html.TextBoxFor(m => m.ApplicationName)
+}
