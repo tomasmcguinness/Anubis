@@ -3,6 +3,11 @@
     ViewBag.Title = "Create New Application";
     Layout = "~/Views/Shared/_WideLayout.cshtml";
 }
+@section BarButton
+{
+    <button class="btn"></button>
+}
+
 @using(Html.BeginForm())
 {
     @Html.LabelFor(m => m.ApplicationName)
