@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebMatrix.WebData;
 
 namespace Anubis.Web.Controllers
 {
@@ -31,7 +32,7 @@ namespace Anubis.Web.Controllers
             if (ModelState.IsValid)
             {
                 ApplicationManager manager = new ApplicationManager();
-                manager.CreateApplication(model.ApplicationName);
+                manager.CreateApplication(WebSecurity.CurrentUserId, model.ApplicationName);
                 return RedirectToAction("Index");
             }
 

@@ -198,8 +198,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TracingController.cs" />
-    <Compile Include="Data\AnubisContext.cs" />
-    <Compile Include="Data\Application.cs" />
     <Compile Include="Entities\LogEntity.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -356,6 +354,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Anubis.Data\Anubis.Data.csproj">
+      <Project>{dbd91c04-d881-4c76-9d4d-6a2ad202324d}</Project>
+      <Name>Anubis.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

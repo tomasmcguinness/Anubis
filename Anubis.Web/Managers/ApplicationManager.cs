@@ -16,13 +16,27 @@ namespace Anubis.Web.Managers
             }
         }
 
-        public void CreateApplication(string applicationName)
+        public void CreateApplication(int userId, string applicationName)
         {
             using (var ctx = new AnubisContext())
             {
-                ctx.Applications.Add(new Application() { Name = applicationName });
+                ctx.Applications.Add(new Application() { Name = applicationName, Code = GetRandomApplicationCode(userId) });
                 ctx.SaveChanges();
             }
+        }
+
+        private string GetRandomApplicationCode(int userId)
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            var result = new string(
+                Enumerable.Repeat(chars, 8)
+                          .Select(s => s[random.Next(s.Length)])
+                          .ToArray());
+
+            result = string.Format("{0}{1}", userId, result);
+
+            return result;
         }
     }
 }
