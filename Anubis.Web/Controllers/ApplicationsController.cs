@@ -1,4 +1,5 @@
-﻿using Anubis.Web.Managers;
+﻿using Anubis.Web.Filters;
+using Anubis.Web.Managers;
 using Anubis.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using WebMatrix.WebData;
 
 namespace Anubis.Web.Controllers
 {
+    [InitializeSimpleMembership]
     public class ApplicationsController : Controller
     {
         public ActionResult Index()
@@ -16,7 +18,7 @@ namespace Anubis.Web.Controllers
             ApplicationManager manager = new ApplicationManager();
             var apps = manager.GetApplications();
 
-            var appModels = apps.Select(s => new ApplicationModel() { Name = s.Name }).ToList();
+            var appModels = apps.Select(s => new ApplicationModel() { Name = s.Name, Code = s.Code }).ToList();
 
             return View(appModels);
         }

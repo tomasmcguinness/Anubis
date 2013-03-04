@@ -13,12 +13,14 @@
     <tr>
         <th>Application Name</th>
         <th>Code</th>
+        <th />
     </tr>
     @foreach (var app in Model)
     {
         <tr>
             <td>@app.Name</td>
-            <td></td>
+            <td>@app.Code</td>
+            <td><a href="#" class="btn btn-small">Open</a></td>
         </tr>
     }
 </table>
