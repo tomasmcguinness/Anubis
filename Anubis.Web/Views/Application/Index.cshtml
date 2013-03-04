@@ -1,14 +1,46 @@
 ﻿@model Anubis.Web.Models.ApplicationModel
 @{
-    ViewBag.Title = @Model.Name;
-    Layout = "~/Views/Shared/_WideLayout.cshtml";
+  ViewBag.Title = @Model.Name;
+  Layout = "~/Views/Shared/_WideLayout.cshtml";
 }
-
+@section BarButton
+{
+  <a class="btn btn-primary" href="#addNewApplicationRegion" role="button" data-toggle="modal">
+    Monitor new region
+  </a>
+}
 <p>
-    This is the dashboard for the application.You can see all a count of all logged messages for each 
+  This is the dashboard for the application.You can see all a count of all logged
+  messages for each 
     data centre.
 </p>
 <div>
-    <strong>West Europe</strong>
-    <img src="~/Images/ajax-loader.gif" />
+  <strong><a href="@Url.Action("Index", "Log", new { applicationId = Model.ApplicationId, regionId = 0 })">West Europe</a></strong>
+  @ViewBag.Count
+  <img src="~/Images/ajax-loader.gif" />
+</div>
+<div id="addNewApplicationRegion" class="modal hide" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true">
+
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Add new region</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+      @using (Html.BeginForm("MonitorRegion", "Application", FormMethod.Post, new { id = "newRegionForm" }))
+      {
+        <label>Azure Regions</label>
+        <select id="selectedRegion" name="selectedRegion">
+          <option value="0">West Europe</option>
+        </select>
+      }
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+    <button type="button" class="btn btn-primary" onclick="$('#newRegionForm').submit();">
+      Add</button>
+  </div>
 </div>

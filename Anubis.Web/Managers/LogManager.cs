@@ -1,4 +1,5 @@
-﻿using Anubis.Web.Entities;
+﻿using Anubis.Web.Data;
+using Anubis.Web.Entities;
 using Anubis.Web.Models;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
@@ -17,16 +18,16 @@ namespace Anubis.Web.Managers
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["TableStorage"]);
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
-            string tableName = GetTableName(ownerId);
+            string tableName = GetTableName(1); // HACK Hardcoding
 
             if (tableClient.DoesTableExist(tableName))
             {
                 TableServiceContext serviceContext = tableClient.GetDataServiceContext();
+                return serviceContext.CreateQuery<LogEntity>(tableName).Where(a => a.PartitionKey.CompareTo(applicationCode) == 0).ToList().Count();
             }
 
             return 0;
         }
-
 
         public void RecordLogMessage(int ownerId, LogModel log)
         {
@@ -56,6 +57,17 @@ namespace Anubis.Web.Managers
 
             // Submit the operation to the table service
             serviceContext.SaveChanges();
+        }
+
+        public List<LogEntity> GetLogMessages(string applicationCode, long regionId)
+        {
+          CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["TableStorage"]);
+          CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+
+          string tableName = GetTableName(1); // HACK Hardcoding
+
+          TableServiceContext serviceContext = tableClient.GetDataServiceContext();
+          return serviceContext.CreateQuery<LogEntity>(tableName).Where(a => a.PartitionKey.CompareTo(applicationCode) == 0).ToList();
         }
 
         private string GetTableName(int ownerId)

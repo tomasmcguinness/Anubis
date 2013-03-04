@@ -46,5 +46,10 @@ namespace Anubis.Web.Managers
                 return ctx.Applications.Find(applicationId);
             }
         }
+
+        public void AddRegionToApplication(int ownerId, long applicationId, int selectedRegion)
+        {
+
+        }
     }
 }

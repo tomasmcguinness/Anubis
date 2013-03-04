@@ -1,0 +1,25 @@
+﻿@model List<Anubis.Web.Entities.LogEntity>
+@{
+  ViewBag.Title = "Log";
+  Layout = "~/Views/Shared/_WideLayout.cshtml";
+}
+<p>Some crap here</p>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Level</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var log in Model)
+    {
+      <tr>
+        <td style="border-left-color: red; border-left-width:2px;">@log.Timestamp</td>
+        <td>@log.LogLevel</td>
+        <td>@log.Message</td>
+      </tr>
+    }
+  </tbody>
+</table>

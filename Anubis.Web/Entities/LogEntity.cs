@@ -8,6 +8,11 @@ namespace Anubis.Web.Entities
 {
     public class LogEntity : TableServiceEntity
     {
+        public LogEntity()
+        {
+            // NO OP for Table Services        
+        }
+
         public LogEntity(int ownerId, string applicationName)
         {
             this.PartitionKey = applicationName;

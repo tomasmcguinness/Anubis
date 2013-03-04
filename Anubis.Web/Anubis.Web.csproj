@@ -197,6 +197,7 @@
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\TracingController.cs" />
     <Compile Include="Entities\LogEntity.cs" />
@@ -347,6 +348,7 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Applications\Index.cshtml" />
     <Content Include="Views\Application\Index.cshtml" />
+    <Content Include="Views\Log\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
