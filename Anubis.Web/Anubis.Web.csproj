@@ -346,7 +346,6 @@
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Applications\Index.cshtml" />
-    <Content Include="Views\Applications\Create.cshtml" />
     <Content Include="Views\Application\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

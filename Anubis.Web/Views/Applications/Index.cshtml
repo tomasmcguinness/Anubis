@@ -1,27 +1,48 @@
 ﻿@model System.Collections.Generic.List<Anubis.Web.Models.ApplicationModel>
 @{
-    ViewBag.Title = "Applications";
-    Layout = "~/Views/Shared/_WideLayout.cshtml";
+  ViewBag.Title = "Applications";
+  Layout = "~/Views/Shared/_WideLayout.cshtml";
 }
 @section BarButton
 {
-    <a class="btn btn-primary" href="@Url.Action("Create")">Create New Application
-    </a>
+  <a class="btn btn-primary" href="#addNewApplicationModel" role="button" data-toggle="modal">
+    Add new application
+  </a>
 }
 <p>All of your applications are listed here.</p>
 <table class="table table-bordered">
+  <tr>
+    <th>Name</th>
+  </tr>
+  @foreach (var app in Model)
+  {
     <tr>
-        <th>Application Name</th>
-        <th>Code</th>
-        <th style="width: 50px;" />
+      <td><a href="@Url.Action("Index", "Application", new { applicationId = app.ApplicationId })">@app.Name</a>
+      </td>
     </tr>
-    @foreach (var app in Model)
-    {
-        <tr>
-            <td>@app.Name</td>
-            <td>@app.Code</td>
-            <td><a href="@Url.Action("Index", "Application", new { applicationId = app.ApplicationId })" class="btn btn-small">Open</a></td>
-        </tr>
-    }
+  }
 </table>
+
+<div id="addNewApplicationModel" class="modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  @using (Html.BeginForm("Create", "Applications"))
+  {
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>Add new application</h3>
+    </div>
+    <div class="modal-body">
+      <p>
+        <label>Name</label>
+        <input id="applicationName" name="applicationName" type="text" placeholder="My Application Name"
+          style="width: 90%" />
+      </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+      <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+  }
+</div>
+
 

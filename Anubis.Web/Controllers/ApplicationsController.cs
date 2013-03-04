@@ -23,11 +23,6 @@ namespace Anubis.Web.Controllers
             return View(appModels);
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult Create(CreateApplicationModel model)
         {

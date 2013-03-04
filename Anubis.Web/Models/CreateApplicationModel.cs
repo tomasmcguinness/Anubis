@@ -8,8 +8,8 @@ namespace Anubis.Web.Models
 {
     public class CreateApplicationModel
     {
-        [Display(Name="New Application Name")]
         [Required]
+        [Display(Name = "New Application Name")]
         public string ApplicationName { get; set; }
     }
 }
