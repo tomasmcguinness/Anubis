@@ -18,7 +18,7 @@ namespace Anubis.Web.Controllers
             ApplicationManager manager = new ApplicationManager();
             var apps = manager.GetApplications();
 
-            var appModels = apps.Select(s => new ApplicationModel() { Name = s.Name, Code = s.Code }).ToList();
+            var appModels = apps.Select(s => new ApplicationModel() { ApplicationId = s.ApplicationId, Name = s.Name, Code = s.Code }).ToList();
 
             return View(appModels);
         }

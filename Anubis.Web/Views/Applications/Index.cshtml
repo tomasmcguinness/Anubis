@@ -13,14 +13,14 @@
     <tr>
         <th>Application Name</th>
         <th>Code</th>
-        <th />
+        <th style="width: 50px;" />
     </tr>
     @foreach (var app in Model)
     {
         <tr>
             <td>@app.Name</td>
             <td>@app.Code</td>
-            <td><a href="#" class="btn btn-small">Open</a></td>
+            <td><a href="@Url.Action("Index", "Application", new { applicationId = app.ApplicationId })" class="btn btn-small">Open</a></td>
         </tr>
     }
 </table>

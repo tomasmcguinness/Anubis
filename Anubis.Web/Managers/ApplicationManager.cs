@@ -38,5 +38,13 @@ namespace Anubis.Web.Managers
 
             return result;
         }
+
+        public Application GetApplication(long applicationId)
+        {
+            using (var ctx = new AnubisContext())
+            {
+                return ctx.Applications.Find(applicationId);
+            }
+        }
     }
 }
