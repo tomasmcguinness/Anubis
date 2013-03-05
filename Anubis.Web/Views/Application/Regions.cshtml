@@ -1,0 +1,16 @@
+﻿@model List<Anubis.Web.Models.ApplicationRegionModel>
+@{
+    Layout = null;
+}
+@foreach (var region in Model)
+{
+    <div style="width:300px; border:1px solid #444; float:left; margin-right:10px;">
+        <div style="background:#444; padding:10px; color: #FFF; font-size:26px;">@region.Name</div>
+        <div style="padding:10px; font-size:32px; margin-top:10px;">
+            1,023,000
+        </div> 
+        <div style="padding:10px;">
+            <a class="btn btn-small btn-info" href="@Url.Action("Index","Log", new {applicationId = ViewBag.ApplicationId, regionId = region.ApplicationRegionId})">View All >></a>
+        </div>
+    </div>
+}

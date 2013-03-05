@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AnubisContext.cs" />
     <Compile Include="Application.cs" />
+    <Compile Include="ApplicationRegion.cs" />
     <Compile Include="Migrations\201303012252414_InitialCreate.cs" />
     <Compile Include="Migrations\201303012252414_InitialCreate.Designer.cs">
       <DependentUpon>201303012252414_InitialCreate.cs</DependentUpon>
@@ -55,6 +56,10 @@
     <Compile Include="Migrations\201303031921453_Added Code to Application.cs" />
     <Compile Include="Migrations\201303031921453_Added Code to Application.Designer.cs">
       <DependentUpon>201303031921453_Added Code to Application.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201303041851242_Added Regions.cs" />
+    <Compile Include="Migrations\201303041851242_Added Regions.Designer.cs">
+      <DependentUpon>201303041851242_Added Regions.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +74,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201303031921453_Added Code to Application.resx">
       <DependentUpon>201303031921453_Added Code to Application.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201303041851242_Added Regions.resx">
+      <DependentUpon>201303041851242_Added Regions.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

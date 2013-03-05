@@ -1,4 +1,5 @@
-﻿using Anubis.Web.Data;
+﻿using Anubis.Data;
+using Anubis.Web.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,14 @@ namespace Anubis.Web.Managers
             return result;
         }
 
+        private Application GetApplication(int ownerId, long applicationId)
+        {
+            using (var ctx = new AnubisContext())
+            {
+                return ctx.Applications.Where(a => a.ApplicationId == applicationId && a.OwnerId == ownerId).Single();
+            }
+        }
+
         public Application GetApplication(long applicationId)
         {
             using (var ctx = new AnubisContext())
@@ -49,7 +58,28 @@ namespace Anubis.Web.Managers
 
         public void AddRegionToApplication(int ownerId, long applicationId, int selectedRegion)
         {
+            ApplicationRegion region = new ApplicationRegion();
+            using (var ctx = new AnubisContext())
+            {
+                var app = ctx.Applications.Find(applicationId);
+                app.Regions.Add(new ApplicationRegion() { ApplicationRegionId = selectedRegion, Application = app });
+                ctx.SaveChanges();
+            }
+        }
 
+        public List<ApplicationRegion> GetApplicationRegions(int ownerId, long applicationId)
+        {
+            using (var ctx = new AnubisContext())
+            {
+                var app = ctx.Applications.Find(applicationId);
+
+                if (app.Regions != null)
+                {
+                    return app.Regions.ToList();
+                }
+
+                return null;
+            }
         }
     }
 }

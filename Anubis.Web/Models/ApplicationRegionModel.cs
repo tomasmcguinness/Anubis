@@ -5,12 +5,9 @@ using System.Web;
 
 namespace Anubis.Web.Models
 {
-    public class ApplicationModel
+    public class ApplicationRegionModel
     {
-        public long ApplicationId { get; set; }
+        public long ApplicationRegionId { get; set; }
         public string Name { get; set; }
-        public string Code { get; set; }
-
-        public object Regions { get; set; }
     }
 }

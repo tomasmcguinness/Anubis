@@ -209,8 +209,11 @@
     <Compile Include="Managers\LogManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ApplicationLogModel.cs" />
     <Compile Include="Models\ApplicationModel.cs" />
+    <Compile Include="Models\ApplicationRegionModel.cs" />
     <Compile Include="Models\CreateApplicationModel.cs" />
+    <Compile Include="Models\LogMessageModel.cs" />
     <Compile Include="Models\LogModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -349,6 +352,7 @@
     <Content Include="Views\Applications\Index.cshtml" />
     <Content Include="Views\Application\Index.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
+    <Content Include="Views\Application\Regions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
