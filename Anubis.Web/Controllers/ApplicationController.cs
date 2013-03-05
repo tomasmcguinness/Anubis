@@ -13,20 +13,21 @@ using WebMatrix.WebData;
 namespace Anubis.Web.Controllers
 {
     [InitializeSimpleMembership]
+    [Authorize]
     public class ApplicationController : Controller
     {
-        private ApplicationManager manager;
+        private ApplicationManager appManager;
         private LogManager logManager;
 
         public ApplicationController()
         {
-            manager = new ApplicationManager();
+            appManager = new ApplicationManager();
             logManager = new LogManager();
         }
 
         public ActionResult Index(long applicationId)
         {
-            Application app = manager.GetApplication(applicationId);
+            Application app = appManager.GetApplication(applicationId);
 
             ApplicationModel model = new ApplicationModel()
             {
@@ -35,20 +36,18 @@ namespace Anubis.Web.Controllers
                 Code = app.Code
             };
 
-            ViewBag.Count = logManager.GetLogMessageCount(1, "Anubis", null);
-
             return View(model);
         }
 
         public ActionResult Regions(long applicationId)
         {
-            List<ApplicationRegion> regions = manager.GetApplicationRegions(WebSecurity.CurrentUserId, applicationId);
+            List<ApplicationRegion> regions = appManager.GetApplicationRegions(WebSecurity.CurrentUserId, applicationId);
 
             List<ApplicationRegionModel> model = new List<ApplicationRegionModel>();
 
             foreach (var region in regions)
             {
-                model.Add(new ApplicationRegionModel() { Name = "West Europe" });
+                model.Add(new ApplicationRegionModel() { Name = ApplicationManager.GetRegionName(region.RegionId), RegionId = region.RegionId });
             }
 
             return View(model);
@@ -56,13 +55,16 @@ namespace Anubis.Web.Controllers
 
         public ActionResult MonitorRegion(long applicationId, int selectedRegion)
         {
-            manager.AddRegionToApplication(WebSecurity.CurrentUserId, applicationId, selectedRegion);
+            appManager.AddRegionToApplication(WebSecurity.CurrentUserId, applicationId, selectedRegion);
             return RedirectToAction("Index", new { applicationId = applicationId });
         }
 
-        public int GetNumberOfMessagesForDataCentre()
+        [HttpPost]
+        public int GetNumberOfMessagesForRegion(long applicationId, int regionId)
         {
-            return 0;
+            var app = appManager.GetApplication(applicationId);
+            var messageCount = logManager.GetLogMessageCount(WebSecurity.CurrentUserId, app.Code, regionId);
+            return messageCount;
         }
     }
 }

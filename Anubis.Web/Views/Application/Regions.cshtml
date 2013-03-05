@@ -1,16 +1,48 @@
 ﻿@model List<Anubis.Web.Models.ApplicationRegionModel>
 @{
-    Layout = null;
+  Layout = null;
 }
 @foreach (var region in Model)
 {
-    <div style="width:300px; border:1px solid #444; float:left; margin-right:10px;">
-        <div style="background:#444; padding:10px; color: #FFF; font-size:26px;">@region.Name</div>
-        <div style="padding:10px; font-size:32px; margin-top:10px;">
-            1,023,000
-        </div> 
-        <div style="padding:10px;">
-            <a class="btn btn-small btn-info" href="@Url.Action("Index","Log", new {applicationId = ViewBag.ApplicationId, regionId = region.ApplicationRegionId})">View All >></a>
-        </div>
+  <div style="width: 300px; border: 1px solid #444; float: left; margin-right: 10px;
+    margin-bottom: 10px; border-radius: 0 0 10px 0">
+    <div style="background: #444; padding: 10px; color: #FFF; font-size: 26px;">@region.Name
     </div>
+    <div class="regionLogCount" style="padding:10px; font-size:32px; margin-top:10px;" data-region-id="@region.RegionId">
+      <span>0</span>
+      <img src="~/Images/ajax-loader.gif" />
+    </div>
+    <div style="padding: 10px;">
+      <a class="btn btn-small btn-info" href="@Url.Action("Index", "Log", new { applicationId = ViewBag.ApplicationId, regionId = region.RegionId })">
+        View All >></a>
+    </div>
+  </div>
 }
+<div class="clearfix"></div>
+<script type="text/javascript">
+  $().ready(function () {
+    refreshMessageCounts();
+  });
+
+  function refreshMessageCounts() {
+    $("div.regionLogCount").each(function (index, element) {
+      $(element).children("img").show();
+      $(element).children("span").hide();
+
+      $.ajax({
+        type: "POST",
+        url: '@Url.Action("GetNumberOfMessagesForRegion", "Application")',
+        data: { applicationId: 1, regionId: $(element).data("region-id") }
+      }).done(function (msg) {
+        $(element).children("span").html(msg);
+        $(element).children("span").show();
+        $(element).children("img").hide();
+      }).error(function () {
+        $(element).children("img").hide();
+        $(element).children("span").html("NO DATA");
+        $(element).children("span").show();
+      });
+
+    });
+  }
+</script>

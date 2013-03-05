@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WebMatrix.WebData;
 
 namespace Anubis.Web.Controllers
 {
@@ -13,7 +14,14 @@ namespace Anubis.Web.Controllers
   {
     public ActionResult Index()
     {
-      return View();
+      if (WebSecurity.IsAuthenticated)
+      {
+        return RedirectToAction("Index", "Applications");
+      }
+      else
+      {
+        return View();
+      }
     }
 
     public ActionResult Signup()

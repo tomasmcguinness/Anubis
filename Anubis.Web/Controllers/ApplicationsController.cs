@@ -11,6 +11,7 @@ using WebMatrix.WebData;
 namespace Anubis.Web.Controllers
 {
     [InitializeSimpleMembership]
+    [Authorize]
     public class ApplicationsController : Controller
     {
         public ActionResult Index()

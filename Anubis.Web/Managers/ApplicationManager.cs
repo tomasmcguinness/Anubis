@@ -62,7 +62,7 @@ namespace Anubis.Web.Managers
             using (var ctx = new AnubisContext())
             {
                 var app = ctx.Applications.Find(applicationId);
-                app.Regions.Add(new ApplicationRegion() { ApplicationRegionId = selectedRegion, Application = app });
+                app.Regions.Add(new ApplicationRegion() { RegionId = selectedRegion, Application = app });
                 ctx.SaveChanges();
             }
         }
@@ -81,5 +81,33 @@ namespace Anubis.Web.Managers
                 return null;
             }
         }
+
+        public static string GetRegionName(int p)
+        {
+          switch (p)
+          {
+            case 10:
+              return "West US";
+            case 20:
+              return "East US";
+            case 30:
+              return "East Asia";
+            case 40:
+              return "North Europe";
+            case 50:
+              return "West Europe";
+            default:
+              return "Unknown";
+          }
+        }
+
+        public Application GetUserAccountForCode(string code)
+        {
+            using (var ctx = new AnubisContext())
+            {
+                var app = ctx.Applications.Where(a => a.Code == code).SingleOrDefault();
+                return app;
+            }
+          }
     }
 }

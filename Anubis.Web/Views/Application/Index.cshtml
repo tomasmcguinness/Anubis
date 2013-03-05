@@ -5,6 +5,8 @@
 }
 @section BarButton
 {
+    <a class="btn" href="#appDetails" role="button" data-toggle="modal">App Details</a>
+    <button class="btn" onclick="refreshMessageCounts()">Refresh</button>
     <a class="btn btn-primary" href="#addNewApplicationRegion" role="button" data-toggle="modal">Monitor new region
     </a>
 }
@@ -14,11 +16,6 @@
     data centre.
 </p>
 @{Html.RenderAction("Regions", new { applicationId = Model.ApplicationId });}
-@*<div>
-    <strong><a href="@Url.Action("Index", "Log", new { applicationId = Model.ApplicationId, regionId = 0 })">West Europe</a></strong>
-    @ViewBag.Count
-    <img src="~/Images/ajax-loader.gif" />
-</div>*@
 <div id="addNewApplicationRegion" class="modal hide" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel"
     aria-hidden="true">
@@ -33,7 +30,11 @@
                 @Html.HiddenFor(m => m.ApplicationId)
                 <label>Azure Regions</label>
                 <select id="selectedRegion" name="selectedRegion">
-                    <option value="0">West Europe</option>
+                    <option value="10">West US</option>
+                    <option value="20">East US</option>
+                    <option value="30">East Asia</option>
+                    <option value="40">North Europe</option>
+                    <option value="50">West Europe</option>
                 </select>
             }
         </p>
@@ -42,5 +43,26 @@
         <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
         <button type="button" class="btn btn-primary" onclick="$('#newRegionForm').submit();">
             Add</button>
+    </div>
+</div>
+
+<div id="appDetails" class="modal hide" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>@Model.Name Details</h3>
+    </div>
+    <div class="modal-body">
+        <p>
+          <label>Application Code</label>
+          <input type="text" readonly value="@Model.Code" /><br />
+          <span style="font-size:12px;">
+            Use this application code when setting up your logging client. It enables the client to log against the correct application.
+          </span>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
     </div>
 </div>

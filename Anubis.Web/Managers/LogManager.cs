@@ -13,12 +13,12 @@ namespace Anubis.Web.Managers
 {
     public class LogManager
     {
-        public int GetLogMessageCount(int ownerId, string applicationCode, string dataCentre)
+        public int GetLogMessageCount(int ownerId, string applicationCode, int regionId)
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["TableStorage"]);
+          CloudStorageAccount storageAccount = GetStorageAccountForRegion(regionId);
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
-            string tableName = GetTableName(1); // HACK Hardcoding
+            string tableName = GetTableName(ownerId);
 
             if (tableClient.DoesTableExist(tableName))
             {
@@ -29,25 +29,31 @@ namespace Anubis.Web.Managers
             return 0;
         }
 
-        public void RecordLogMessage(int ownerId, LogModel log)
+        private CloudStorageAccount GetStorageAccountForRegion(int regionId)
         {
-            RecordLogMessage(ownerId, null, log);
+          switch(regionId)
+          {
+            case 50:
+               return CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StoreWestEurope"]);
+          }
+
+          throw new NotImplementedException();
         }
 
-        public void RecordLogMessage(int ownerId, string applicationCode, LogModel log)
+        public void RecordLogMessage(Anubis.Data.Application app, LogModel log)
         {
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["TableStorage"]);
 
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
-            string tableName = GetTableName(ownerId);
+            string tableName = GetTableName(app.OwnerId);
 
             tableClient.CreateTableIfNotExist(tableName);
 
             TableServiceContext serviceContext = tableClient.GetDataServiceContext();
 
             // Create a new customer entity
-            LogEntity customer1 = new LogEntity(ownerId, applicationCode);
+            LogEntity customer1 = new LogEntity(app.OwnerId, app.Code);
             customer1.Message = log.Message;
             customer1.Timestamp = DateTime.UtcNow;
             customer1.LogLevel = log.Level;
@@ -59,15 +65,15 @@ namespace Anubis.Web.Managers
             serviceContext.SaveChanges();
         }
 
-        public List<LogEntity> GetLogMessages(string applicationCode, long regionId)
+        public List<LogEntity> GetLogMessages(int ownerId, string applicationCode, int regionId)
         {
-          CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["TableStorage"]);
+          CloudStorageAccount storageAccount = GetStorageAccountForRegion(regionId);
           CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
-          string tableName = GetTableName(1); // HACK Hardcoding
+          string tableName = GetTableName(ownerId);
 
           TableServiceContext serviceContext = tableClient.GetDataServiceContext();
-          return serviceContext.CreateQuery<LogEntity>(tableName).Where(a => a.PartitionKey.CompareTo(applicationCode) == 0).ToList();
+          return serviceContext.CreateQuery<LogEntity>(tableName).Where(a => a.PartitionKey.CompareTo(applicationCode) == 0).ToList().OrderByDescending(a => a.Timestamp).ToList();
         }
 
         private string GetTableName(int ownerId)

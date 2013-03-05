@@ -16,5 +16,12 @@ namespace Anubis.Web.Controllers
             log.Trace("Returning Index");
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Index(string message)
+        {
+          log.Trace(message);
+          return View();
+        }
     }
 }

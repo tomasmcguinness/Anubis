@@ -16,21 +16,20 @@ namespace Anubis.Client.NLog
     public AnubisTarget()
     {
       this.handler = new TraceHandler();
-      this.Host = "localhost";
     }
 
-    public string Host { get; set; }
+    public string Code { get; set; }
 
     protected override void Write(LogEventInfo logEvent)
     {
       string logMessage = this.Layout.Render(logEvent);
-      Task t = SendTheMessageToRemoteHost(this.Host, logEvent.Level, logMessage);
+      Task t = SendTheMessageToRemoteHost(this.Code, logEvent.Level, logMessage);
       t.Wait();
     }
 
-    private async Task SendTheMessageToRemoteHost(string host, LogLevel level, string message)
+    private async Task SendTheMessageToRemoteHost(string code, LogLevel level, string message)
     {
-      Task t = handler.SendTraceRecord(level.ToString().ToLower(), message);
+      Task t = handler.SendTraceRecord(code, level.ToString().ToLower(), message);
       await t;
     }
   }

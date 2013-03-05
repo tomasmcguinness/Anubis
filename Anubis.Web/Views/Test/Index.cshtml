@@ -6,4 +6,9 @@
 <p>
   Click this button below to generate some logging.
 </p>
-<button class="btn btn-info">Generate Logging</button>
+
+@using (Html.BeginForm())
+{
+  <input type="text" name="message" /><br />
+  <button class="btn btn-info">Generate Logging</button>
+}

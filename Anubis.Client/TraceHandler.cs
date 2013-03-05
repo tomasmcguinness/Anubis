@@ -10,16 +10,13 @@ using System.Threading.Tasks;
 
 namespace Anubis.Client
 {
-  internal class TraceHandler
+  public class TraceHandler
   {
-    public async Task SendTraceRecord(string level, string message)
+    public async Task SendTraceRecord(string code, string level, string message)
     {
       HttpClient client = new HttpClient();
 
-      string key = ConfigurationManager.AppSettings["anubis_key"];
-      string application = ConfigurationManager.AppSettings["anubis_application"];
-
-      string url = string.Format("http://localhost:61106/api/tracing/{0}/{1}", key, application);
+      string url = string.Format("http://anubis-we.azurewebsites.net/api/tracing/{0}", code);
 
       LogModel model = new LogModel()
       {
@@ -36,7 +33,7 @@ namespace Anubis.Client
           // What do we do here???
         }
       }
-      catch(Exception exp)
+      catch (Exception exp)
       {
 
       }

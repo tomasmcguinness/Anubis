@@ -8,6 +8,7 @@ namespace Anubis.Web.Models
     public class ApplicationRegionModel
     {
         public long ApplicationRegionId { get; set; }
+        public int RegionId { get; set; }
         public string Name { get; set; }
     }
 }

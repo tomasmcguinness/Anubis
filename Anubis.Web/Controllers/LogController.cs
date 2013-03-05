@@ -1,4 +1,5 @@
 ﻿using Anubis.Web.Entities;
+using Anubis.Web.Filters;
 using Anubis.Web.Managers;
 using Anubis.Web.Models;
 using System;
@@ -6,9 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebMatrix.WebData;
 
 namespace Anubis.Web.Controllers
 {
+    [InitializeSimpleMembership]
+    [Authorize]
     public class LogController : Controller
     {
         private ApplicationManager appManager = null;
@@ -20,14 +24,14 @@ namespace Anubis.Web.Controllers
             logManager = new LogManager();
         }
 
-        public ActionResult Index(long applicationId, long regionId)
+        public ActionResult Index(long applicationId, int regionId)
         {
             var app = appManager.GetApplication(applicationId);
-            List<LogEntity> messages = logManager.GetLogMessages("Anubis", regionId);
+            List<LogEntity> messages = logManager.GetLogMessages(WebSecurity.CurrentUserId, app.Code, regionId);
 
             ApplicationLogModel model = new ApplicationLogModel();
             model.ApplicationName = app.Name;
-            model.RegionName = "West Europe";
+            model.RegionName = ApplicationManager.GetRegionName(regionId);
 
             foreach (var message in messages)
             {

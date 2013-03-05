@@ -1,4 +1,5 @@
-﻿using Anubis.Web.Managers;
+﻿using Anubis.Data;
+using Anubis.Web.Managers;
 using Anubis.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -13,25 +14,18 @@ namespace Anubis.Web.Controllers
     public class TracingController : ApiController
     {
         private LogManager logManager = null;
-        private UserManager userManager = null;
+        private ApplicationManager appManager = null;
 
         public TracingController()
         {
             logManager = new LogManager();
-            userManager = new UserManager();
-        }
-
-        public HttpResponseMessage Post(string code, string applicationName, LogModel log)
-        {
-            int userId = userManager.GetUserAccountForCode(code);
-            logManager.RecordLogMessage(userId, applicationName, log);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            appManager = new ApplicationManager();
         }
 
         public HttpResponseMessage Post(string code, LogModel log)
         {
-            int userId = userManager.GetUserAccountForCode(code);
-            logManager.RecordLogMessage(userId, log);
+            Application app = appManager.GetUserAccountForCode(code);
+            logManager.RecordLogMessage(app, log);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }
