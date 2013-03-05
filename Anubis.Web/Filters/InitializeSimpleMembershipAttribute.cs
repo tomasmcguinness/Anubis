@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 using Anubis.Web.Models;
+using Anubis.Web.Data;
 
 namespace Anubis.Web.Filters
 {
@@ -25,11 +26,11 @@ namespace Anubis.Web.Filters
     {
       public SimpleMembershipInitializer()
       {
-        Database.SetInitializer<UsersContext>(null);
+        Database.SetInitializer<AnubisContext>(null);
 
         try
         {
-          using (var context = new UsersContext())
+          using (var context = new AnubisContext())
           {
             if (!context.Database.Exists())
             {
