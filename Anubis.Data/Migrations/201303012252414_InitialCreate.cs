@@ -7,15 +7,14 @@ namespace Anubis.Data.Migrations
     {
         public override void Up()
         {
-            CreateTable(
-                "dbo.Applications",
-                c => new
-                    {
-                        ApplicationId = c.Long(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.ApplicationId);
-            
+          CreateTable(
+              "dbo.Applications",
+              c => new
+                  {
+                    ApplicationId = c.Long(nullable: false, identity: true),
+                    Name = c.String(),
+                  })
+                  .PrimaryKey(t => t.ApplicationId, clustered: true);
         }
         
         public override void Down()

@@ -15,9 +15,9 @@ namespace Anubis.Data.Migrations
                         RegionId = c.Int(nullable: false),
                         Application_ApplicationId = c.Long(),
                     })
-                .PrimaryKey(t => t.ApplicationRegionId)
-                .ForeignKey("dbo.Applications", t => t.Application_ApplicationId)
-                .Index(t => t.Application_ApplicationId);
+                    .PrimaryKey(t => t.ApplicationRegionId, clustered:true)
+                    .ForeignKey("dbo.Applications", t => t.Application_ApplicationId)
+                    .Index(t => t.Application_ApplicationId);
             
             AddColumn("dbo.Applications", "OwnerId", c => c.Int(nullable: false));
         }
