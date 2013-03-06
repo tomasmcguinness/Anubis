@@ -3,6 +3,9 @@
     ViewBag.Title = string.Format("{0} - {1}", Model.ApplicationName, Model.RegionName);
     Layout = "~/Views/Shared/_WideLayout.cshtml";
 }
+<style type="text/css">
+    
+</style>
 @section BarButton {
     @using (Html.BeginForm())
     {
@@ -21,8 +24,8 @@
         @foreach (var log in Model.LogMessages)
         {
             <tr>
-                <td style="border-left-color: red; border-left-width: 2px;">@log.Timestamp</td>
-                <td>@log.LogLevel</td>
+                <td style="border-left-color: navy; border-left-width: 2px;">@log.Timestamp</td>
+                <td>@log.LogLevel.ToUpper()</td>
                 <td>@log.Message</td>
             </tr>
         }
