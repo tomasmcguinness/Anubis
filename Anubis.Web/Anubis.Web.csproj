@@ -200,6 +200,7 @@
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\ApplicationsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -291,6 +292,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\Help\AddApplicationDialog.PNG" />
+    <Content Include="Images\Help\ApplicationList.PNG" />
+    <Content Include="Images\Help\MonitorNewRegionDialog.PNG" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -362,6 +366,7 @@
     <Content Include="Views\Application\Index.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
     <Content Include="Views\Application\Regions.cshtml" />
+    <Content Include="Views\Help\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
