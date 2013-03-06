@@ -47,7 +47,7 @@ namespace Anubis.Web.Controllers
 
             foreach (var region in regions)
             {
-                model.Add(new ApplicationRegionModel() { Name = ApplicationManager.GetRegionName(region.RegionId), RegionId = region.RegionId });
+                model.Add(new ApplicationRegionModel() { ApplicationId = applicationId, Name = ApplicationManager.GetRegionName(region.RegionId), RegionId = region.RegionId });
             }
 
             return View(model);
@@ -60,6 +60,7 @@ namespace Anubis.Web.Controllers
         }
 
         [HttpPost]
+        [OutputCache(Duration=0)]
         public int GetNumberOfMessagesForRegion(long applicationId, int regionId)
         {
             var app = appManager.GetApplication(applicationId);
