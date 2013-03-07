@@ -9,6 +9,16 @@
 
 @using (Html.BeginForm())
 {
+  <h4>Trace</h4>
+  <input type="hidden" name="level" value="trace" />
   <input type="text" name="message" /><br />
-  <button class="btn btn-info">Generate Logging</button>
+  <button class="btn btn-info">Generate Trace</button>
+}
+
+@using (Html.BeginForm())
+{
+  <h4>Error</h4>
+  <input type="hidden" name="level" value="trace" />
+  <input type="text" name="message" /><br />
+  <button class="btn btn-info">Generate Error</button>
 }

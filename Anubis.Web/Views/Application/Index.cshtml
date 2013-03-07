@@ -1,68 +1,85 @@
 ﻿@model Anubis.Web.Models.ApplicationModel
 @{
-    ViewBag.Title = @Model.Name;
-    Layout = "~/Views/Shared/_WideLayout.cshtml";
+  ViewBag.Title = @Model.Name;
+  Layout = "~/Views/Shared/_WideLayout.cshtml";
 }
 @section BarButton
 {
-    <a class="btn" href="#appDetails" role="button" data-toggle="modal">App Details</a>
-    <button class="btn" onclick="refreshMessageCounts()">Refresh</button>
-    <a class="btn btn-primary" href="#addNewApplicationRegion" role="button" data-toggle="modal">Monitor new region
-    </a>
+  <a class="btn" href="#appDetails" role="button" data-toggle="modal">App Details</a>
+  <button class="btn" onclick="refreshMessageCounts()">Refresh</button>
+  <a class="btn btn-primary" href="#addNewApplicationRegion" role="button" data-toggle="modal">
+    Monitor new region
+  </a>
 }
 <p>
-    This is the dashboard for the application.You can see all a count of all logged
+  This is the dashboard for the application.You can see all a count of all logged
   messages for each 
     data centre.
 </p>
-@{Html.RenderAction("Regions", new { applicationId = Model.ApplicationId });}
+@if (Model.HasRegions)
+{
+  { Html.RenderAction("Regions", new { applicationId = Model.ApplicationId }); }
+}
+else
+{
+  <div>
+    <p>
+      You have not yet added any regions yet. Just use the "Monitor New Region" button.
+    </p>
+    <p>
+      This application uses the logging code <span style="font-style: italic; font-weight: bold">@Model.Code</span>. 
+      For more information on how to use this code, refer to the @Html.ActionLink("help section","Index","Help").
+    </p>
+  </div>
+}
+
 <div id="addNewApplicationRegion" class="modal hide" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Add new region</h3>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>Add new region</h3>
     </div>
     <div class="modal-body">
-        <p>
-            @using (Html.BeginForm("MonitorRegion", "Application", FormMethod.Post, new { id = "newRegionForm" }))
-            {
-                @Html.HiddenFor(m => m.ApplicationId)
-                <label>Azure Regions</label>
-                <select id="selectedRegion" name="selectedRegion">
-                    <option value="10">West US</option>
-                    <option value="20">East US</option>
-                    <option value="30">East Asia</option>
-                    <option value="40">North Europe</option>
-                    <option value="50">West Europe</option>
-                </select>
-            }
-        </p>
+      <p>
+        @using (Html.BeginForm("MonitorRegion", "Application", FormMethod.Post, new { id = "newRegionForm" }))
+        {
+          @Html.HiddenFor(m => m.ApplicationId)
+          <label>Azure Regions</label>
+          <select id="selectedRegion" name="selectedRegion">
+            <option value="10">West US</option>
+            <option value="20">East US</option>
+            <option value="30">East Asia</option>
+            <option value="40">North Europe</option>
+            <option value="50">West Europe</option>
+          </select>
+        }
+      </p>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
-        <button type="button" class="btn btn-primary" onclick="$('#newRegionForm').submit();">
-            Add</button>
+      <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+      <button type="button" class="btn btn-primary" onclick="$('#newRegionForm').submit();">
+        Add</button>
     </div>
-</div>
+  </div>
 
 <div id="appDetails" class="modal hide" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel"
-    aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>@Model.Name Details</h3>
-    </div>
-    <div class="modal-body">
-        <p>
-          <label>Application Code</label>
-          <input type="text" readonly value="@Model.Code" /><br />
-          <span style="font-size:12px;">
-            Use this application code when setting up your logging client. It enables the client to log against the correct application.
-          </span>
-        </p>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
-    </div>
+  aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>@Model.Name Details</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+      <label>Application Code</label>
+      <input type="text" readonly value="@Model.Code" /><br />
+      <span style="font-size: 12px;">Use this application code when setting up your logging
+        client. It enables the client to log against the correct application.
+      </span>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+  </div>
 </div>
