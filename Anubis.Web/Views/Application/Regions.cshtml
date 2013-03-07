@@ -5,8 +5,13 @@
 @if (Model == null || Model.Count() == 0)
 {
     <div>
-        You have not added any regions to your application yet. Use the "Monitor New Region" button and choose the Azure regions that your application
-    runs within.
+        <p>
+            You have not yet added any regions yet. Just use the "Monitor New Region" button.
+        </p>
+        <p>
+            This application uses the logging code <span style="font-style: italic; font-weight: bold">@Model.Code</span>. 
+      For more information on how to use this code, refer to the @Html.ActionLink("help section", "Index", "Help").
+        </p>
     </div>
 }
 else
@@ -41,7 +46,7 @@ else
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("GetNumberOfMessagesForRegion", "Application")',
-                data: { applicationId: 1, regionId: $(element).data("region-id") }
+                data: { applicationId: $(element).data("application-id"), regionId: $(element).data("region-id") }
             }).done(function (msg) {
                 $(element).children("span").html(msg);
                 $(element).children("span").show();

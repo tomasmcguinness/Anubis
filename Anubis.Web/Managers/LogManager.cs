@@ -15,7 +15,7 @@ namespace Anubis.Web.Managers
     {
         public int GetLogMessageCount(int ownerId, string applicationCode, int regionId)
         {
-          CloudStorageAccount storageAccount = GetStorageAccountForRegion(regionId);
+            CloudStorageAccount storageAccount = GetStorageAccountForRegion(regionId);
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
             string tableName = GetTableName(ownerId);
@@ -31,18 +31,18 @@ namespace Anubis.Web.Managers
 
         private CloudStorageAccount GetStorageAccountForRegion(int regionId)
         {
-          switch(regionId)
-          {
-            case 50:
-               return CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StoreWestEurope"]);
-          }
+            switch (regionId)
+            {
+                case 50:
+                    return CloudStorageAccount.Parse(ConfigurationManager.AppSettings["StoreWestEurope"]);
+            }
 
-          throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void RecordLogMessage(Anubis.Data.Application app, LogModel log)
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConfigurationManager.AppSettings["TableStorage"]);
+            CloudStorageAccount storageAccount = GetStorageAccountForRegion(50);
 
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
@@ -67,13 +67,13 @@ namespace Anubis.Web.Managers
 
         public List<LogEntity> GetLogMessages(int ownerId, string applicationCode, int regionId)
         {
-          CloudStorageAccount storageAccount = GetStorageAccountForRegion(regionId);
-          CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+            CloudStorageAccount storageAccount = GetStorageAccountForRegion(regionId);
+            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
-          string tableName = GetTableName(ownerId);
+            string tableName = GetTableName(ownerId);
 
-          TableServiceContext serviceContext = tableClient.GetDataServiceContext();
-          return serviceContext.CreateQuery<LogEntity>(tableName).Where(a => a.PartitionKey.CompareTo(applicationCode) == 0).ToList().OrderByDescending(a => a.Timestamp).ToList();
+            TableServiceContext serviceContext = tableClient.GetDataServiceContext();
+            return serviceContext.CreateQuery<LogEntity>(tableName).Where(a => a.PartitionKey.CompareTo(applicationCode) == 0).ToList().OrderByDescending(a => a.Timestamp).ToList();
         }
 
         private string GetTableName(int ownerId)

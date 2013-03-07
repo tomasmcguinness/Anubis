@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anubis.Client", "Anubis.Cli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anubis.Data", "Anubis.Data\Anubis.Data.csproj", "{DBD91C04-D881-4C76-9D4D-6A2AD202324D}"
 EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Anubis.Cloud", "Anubis.Cloud\Anubis.Cloud.ccproj", "{36D5D7A3-9EE9-4E24-A49F-8D75E724B406}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abubis.AlertProcessor", "Anubis.AlertProcessor\Abubis.AlertProcessor.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,14 @@ Global
 		{DBD91C04-D881-4C76-9D4D-6A2AD202324D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBD91C04-D881-4C76-9D4D-6A2AD202324D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBD91C04-D881-4C76-9D4D-6A2AD202324D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36D5D7A3-9EE9-4E24-A49F-8D75E724B406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36D5D7A3-9EE9-4E24-A49F-8D75E724B406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36D5D7A3-9EE9-4E24-A49F-8D75E724B406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36D5D7A3-9EE9-4E24-A49F-8D75E724B406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B3E0D2-6217-493A-A690-158C497F5318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15B3E0D2-6217-493A-A690-158C497F5318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15B3E0D2-6217-493A-A690-158C497F5318}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

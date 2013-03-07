@@ -17,11 +17,11 @@ namespace Anubis.Web.Managers
             }
         }
 
-        public void CreateApplication(int userId, string applicationName)
+        public void CreateApplication(int ownerId, string applicationName)
         {
             using (var ctx = new AnubisContext())
             {
-                ctx.Applications.Add(new Application() { Name = applicationName, Code = GetRandomApplicationCode(userId) });
+                ctx.Applications.Add(new Application() { Name = applicationName, Code = GetRandomApplicationCode(ownerId), OwnerId = ownerId });
                 ctx.SaveChanges();
             }
         }
