@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="LoggingCentral.0.1.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

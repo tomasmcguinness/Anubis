@@ -8,10 +8,10 @@
         <p>
             You have not yet added any regions yet. Just use the "Monitor New Region" button.
         </p>
-        <p>
-            This application uses the logging code <span style="font-style: italic; font-weight: bold">@Model.Code</span>. 
+       @* <p>
+            This application uses the logging code <span style="font-style: italic; font-weight: bold">@ViewBag.Code</span>. 
       For more information on how to use this code, refer to the @Html.ActionLink("help section", "Index", "Help").
-        </p>
+        </p>*@
     </div>
 }
 else
@@ -21,12 +21,12 @@ else
     <div style="width: 300px; border: 1px solid #444; float: left; margin-right: 10px; margin-bottom: 10px; border-radius: 0 0 10px 0">
         <div style="background: #444; padding: 10px; color: #FFF; font-size: 26px;">@region.Name
         </div>
-        <div class="regionLogCount" style="padding:10px; font-size:32px; margin-top:10px;" data-region-id="@region.RegionId">
+        <div class="regionLogCount" style="padding:10px; font-size:32px; margin-top:10px;" data-application-id="@region.ApplicationId" data-region-id="@region.RegionId">
             <span>0</span>
             <img src="~/Images/ajax-loader.gif" />
         </div>
         <div style="padding: 10px;">
-            <a class="btn btn-small btn-info" href="@Url.Action("Index", "Log", new { applicationId = ViewBag.ApplicationId, regionId = region.RegionId })">View All >></a>
+            <a class="btn btn-small btn-info" href="@Url.Action("Index", "Log", new { applicationId = ViewBag.ApplicationId, regionId = region.RegionId })">View All »</a>
         </div>
     </div>
     }

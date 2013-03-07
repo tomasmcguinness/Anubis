@@ -13,5 +13,8 @@ namespace Anubis.Client.Models
 
         [JsonProperty("level")]
         public string Level { get; set; }
+
+        [JsonProperty("stackTrace")]
+        public string StackTrace { get; set; }
     }
 }

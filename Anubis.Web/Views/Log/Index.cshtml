@@ -4,7 +4,25 @@
     Layout = "~/Views/Shared/_WideLayout.cshtml";
 }
 <style type="text/css">
-    
+    td.error {
+        border-left-width: 5px;
+        border-left-color: red;
+    }
+
+    td.warning {
+        border-left-width: 5px;
+        border-left-color: orange;
+    }
+
+    td.trace {
+        border-left-width: 5px;
+        border-left-color: navy;
+    }
+
+    td.debug {
+        border-left-width: 5px;
+        border-left-color: green;
+    }
 </style>
 @section BarButton {
     @using (Html.BeginForm())
@@ -12,11 +30,14 @@
         <button class="btn btn-primary">Refresh</button>
     }
 }
+<div style="margin-bottom: 10px;">
+    <a class="btn" href="@Url.Action("Index", "Application", new { applicationId = Model.ApplicationId })">Back to application</a>
+</div>
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th style="width:200px;">Date</th>
-            <th style="width:100px;">Level</th>
+            <th style="width: 200px;">Date</th>
+            <th style="width: 100px;">Level</th>
             <th>Message</th>
         </tr>
     </thead>
@@ -24,8 +45,8 @@
         @foreach (var log in Model.LogMessages)
         {
             <tr>
-                <td style="border-left-color: navy; border-left-width: 2px;">@log.Timestamp</td>
-                <td>@log.LogLevel.ToUpper()</td>
+                <td>@log.Timestamp</td>
+                <td class="@log.LogLevel">@log.LogLevel.ToUpper()</td>
                 <td>@log.Message</td>
             </tr>
         }

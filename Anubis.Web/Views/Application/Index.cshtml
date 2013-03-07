@@ -15,7 +15,7 @@
   messages for each 
     data centre.
 </p>
-{ Html.RenderAction("Regions", new { applicationId = Model.ApplicationId }); }
+@{ Html.RenderAction("Regions", new { applicationId = Model.ApplicationId }); }
 <div id="addNewApplicationRegion" class="modal hide" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel"
     aria-hidden="true">

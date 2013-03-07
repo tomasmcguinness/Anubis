@@ -29,7 +29,7 @@ namespace Anubis.Client.NLog
     {
       string logMessage = this.Layout.Render(logEvent);
       string stackTrace = logEvent.StackTrace != null ? BuildStackTrace(logEvent.StackTrace) : null;
-      handler.SendTraceRecord(code, logEvent.Level.ToString().ToLower(), logMessage);
+      handler.SendTraceRecord(code, logEvent.Level.ToString().ToLower(), logMessage, stackTrace);
     }
 
     private string BuildStackTrace(System.Diagnostics.StackTrace stackTrace)

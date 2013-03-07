@@ -20,23 +20,23 @@ namespace Anubis.Web.Controllers
         [HttpPost]
         public ActionResult Index(string level, string message)
         {
-          if (level == "trace")
-          {
-            log.Trace(message);
-          }
-          else
-          {
-            try
+            if (level == "trace")
             {
-              throw new InvalidCastException("Invalid cast for testing");
+                log.Trace(message);
             }
-            catch (Exception exp)
+            else
             {
-              log.Error("Something went wrong", exp);
+                try
+                {
+                    throw new InvalidCastException("Invalid cast for testing");
+                }
+                catch (Exception exp)
+                {
+                    log.Error(message, exp);
+                }
             }
-          }
 
-          return View();
+            return View();
         }
     }
 }
