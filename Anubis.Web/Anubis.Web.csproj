@@ -295,6 +295,7 @@
     <Content Include="Images\Help\AddApplicationDialog.PNG" />
     <Content Include="Images\Help\ApplicationList.PNG" />
     <Content Include="Images\Help\MonitorNewRegionDialog.PNG" />
+    <Content Include="Images\Help\RegionMetric.PNG" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

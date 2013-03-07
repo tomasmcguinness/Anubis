@@ -30,10 +30,10 @@
                 @Html.HiddenFor(m => m.ApplicationId)
                 <label>Azure Regions</label>
                 <select id="selectedRegion" name="selectedRegion">
-                    <option value="10">West US</option>
+                    @*<option value="10">West US</option>
                     <option value="20">East US</option>
                     <option value="30">East Asia</option>
-                    <option value="40">North Europe</option>
+                    <option value="40">North Europe</option>*@
                     <option value="50">West Europe</option>
                 </select>
             }
@@ -42,7 +42,7 @@
     <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
         <button type="button" class="btn btn-primary" onclick="$('#newRegionForm').submit();">
-            Add</button>
+            Monitor Region</button>
     </div>
 </div>
 

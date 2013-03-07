@@ -5,21 +5,33 @@
 <style type="text/css">
     img {
         margin: 10px;
-        border:2px solid #888;
-        padding:5px;
+        border: 2px solid #888;
+        padding: 5px;
     }
 </style>
+<h2>Logging Central Help</h2>
 <p>
     To get started with LoggingCentral, you must first create a new Application. An application represents
     your Azure application. Logs generated will stored within that application and will help you manage them.
     On the Applications page, click the "Add new application" button. This will open a dialog.
 </p>
-<img src="~/Images/Help/AddApplicationDialog.PNG" style="width:400px;" />
+<img src="~/Images/Help/AddApplicationDialog.PNG" style="width: 400px;" />
 <p>
     Once you have added your application, it will in your list of Applications.
 </p>
 <img src="~/Images/Help/ApplicationList.PNG" />
 <p>
-    Select the application you have just added by clicking on its name.
+    Select the application you have just added by clicking on its name. Your application will be running within one or several of the Azure 
+    data centres. You must now add the various regions that host your application. Click the "Monitor New Region" and choose the region. Repeast
+    this process for all the regions you want to monitor.
 </p>
 <img src="~/Images/Help/MonitorNewRegionDialog.PNG" />
+<p>
+    Once you've added a region, you will be able to see the number of log messages generated. As this is a new application and you haven't yet
+    integrated LoggingCentral into your app, this will read NO DATA.
+</p>
+<img src="~/Images/Help/RegionMetric.PNG" />
+<p>
+    You're now ready to integrate LoggingCentral into your application so that your log messages will be received and displayed within the LoggingCentral 
+    platform.
+</p>
