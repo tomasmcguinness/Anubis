@@ -13,76 +13,75 @@ using Microsoft.WindowsAzure.StorageClient;
 
 namespace WorkerRoleWithSBQueue1
 {
-  public class WorkerRole : RoleEntryPoint
-  {
-    // The name of your queue
-    const string QueueName = "Error";
-
-    // QueueClient is thread-safe. Recommended that you cache 
-    // rather than recreating it on every request
-    QueueClient Client;
-    bool IsStopped;
-
-    public override void Run()
+    public class WorkerRole : RoleEntryPoint
     {
-      SubscriptionClient Client = SubscriptionClient.CreateFromConnectionString("Endpoint=sb://anubis.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=0P3oVJss/4SrHYVgr6SdsLUgjzH9wXec44ODUJtZwWo=", "ErrorLogCollectionTopic", "ErrorMessages", ReceiveMode.ReceiveAndDelete);
+        // The name of your queue
+        const string QueueName = "errorlogcollectiontopic";
 
-      while (!IsStopped)
-      {
-        try
+        // QueueClient is thread-safe. Recommended that you cache 
+        // rather than recreating it on every request
+        SubscriptionClient client;
+        MessageReceiver receiver;
+        bool IsStopped;
+
+        public override void Run()
         {
-          BrokeredMessage message = Client.Receive();
+            while (!IsStopped)
+            {
+                try
+                {
+                    BrokeredMessage message = client.Receive();
 
-          if (message != null)
-          {
+                    if (message != null)
+                    {
 
-          }
+                    }
+                }
+                catch (MessagingException e)
+                {
+                    if (!e.IsTransient)
+                    {
+                        Trace.WriteLine(e.Message);
+                        throw;
+                    }
+
+                    Thread.Sleep(10000);
+                }
+                catch (OperationCanceledException e)
+                {
+                    if (!IsStopped)
+                    {
+                        Trace.WriteLine(e.Message);
+                        throw;
+                    }
+                }
+            }
         }
-        catch (MessagingException e)
+
+        public override bool OnStart()
         {
-          if (!e.IsTransient)
-          {
-            Trace.WriteLine(e.Message);
-            throw;
-          }
+            // Create the queue if it does not exist already
+            string connectionString = "Endpoint=sb://anubis.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=0P3oVJss/4SrHYVgr6SdsLUgjzH9wXec44ODUJtZwWo=";
 
-          Thread.Sleep(10000);
+            var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
+
+            if (!namespaceManager.TopicExists(QueueName))
+            {
+                namespaceManager.CreateTopic(QueueName);
+            }
+
+            // Initialize the connection to Service Bus Queue
+            client = SubscriptionClient.CreateFromConnectionString(connectionString, QueueName, "ErrorLogs");
+            IsStopped = false;
+            return base.OnStart();
         }
-        catch (OperationCanceledException e)
+
+        public override void OnStop()
         {
-          if (!IsStopped)
-          {
-            Trace.WriteLine(e.Message);
-            throw;
-          }
+            // Close the connection to Service Bus Queue
+            IsStopped = true;
+            client.Close();
+            base.OnStop();
         }
-      }
     }
-
-    public override bool OnStart()
-    {
-      // Create the queue if it does not exist already
-      string connectionString = "Endpoint=sb://anubis.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=0P3oVJss/4SrHYVgr6SdsLUgjzH9wXec44ODUJtZwWo=";
-
-      var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
-
-      if (!namespaceManager.QueueExists(QueueName))
-      {
-        namespaceManager.CreateQueue(QueueName);
-      }
-
-      // Initialize the connection to Service Bus Queue
-      Client = QueueClient.CreateFromConnectionString(connectionString, QueueName);
-      IsStopped = false;
-      return base.OnStart();
-    }
-
-    public override void OnStop()
-    {
-      // Close the connection to Service Bus Queue
-      IsStopped = true;
-      Client.Close();
-      base.OnStop();
-    }
-  }
 }
