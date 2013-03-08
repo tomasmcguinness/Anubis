@@ -30,6 +30,7 @@ namespace Anubis.Web.Controllers
             List<LogEntity> messages = logManager.GetLogMessages(WebSecurity.CurrentUserId, app.Code, regionId);
 
             ApplicationLogModel model = new ApplicationLogModel();
+            model.ApplicationId = applicationId;
             model.ApplicationName = app.Name;
             model.RegionName = ApplicationManager.GetRegionName(regionId);
 

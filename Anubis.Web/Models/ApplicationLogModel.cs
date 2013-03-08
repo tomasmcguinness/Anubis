@@ -12,6 +12,7 @@ namespace Anubis.Web.Models
             LogMessages = new List<LogMessageModel>();
         }
 
+        public long ApplicationId { get; set; }
         public string ApplicationName { get; set; }
         public string RegionName { get; set; }
         public List<LogMessageModel> LogMessages { get; private set; }
