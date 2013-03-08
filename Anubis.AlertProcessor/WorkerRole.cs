@@ -15,17 +15,13 @@ namespace WorkerRoleWithSBQueue1
 {
     public class WorkerRole : RoleEntryPoint
     {
-        // The name of your queue
         const string QueueName = "Error";
 
-        // QueueClient is thread-safe. Recommended that you cache 
-        // rather than recreating it on every request
-        QueueClient Client;
+        SubscriptionClient Client;
         bool IsStopped;
 
         public override void Run()
         {
-            SubscriptionClient Client = SubscriptionClient.CreateFromConnectionString("Endpoint=sb://anubis.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=0P3oVJss/4SrHYVgr6SdsLUgjzH9wXec44ODUJtZwWo=", "ErrorLogCollectionTopic", "ErrorMessages", ReceiveMode.ReceiveAndDelete);
             
             while (!IsStopped)
             {
@@ -66,13 +62,15 @@ namespace WorkerRoleWithSBQueue1
 
             var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
 
-            if (!namespaceManager.QueueExists(QueueName))
+            if (!namespaceManager.SubscriptionExists("errorlogcollectiontopic", "AllMessages"))
             {
-                namespaceManager.CreateQueue(QueueName);
+                namespaceManager.CreateSubscription("errorlogcollectiontopic", "AllMessages");
             }
 
             // Initialize the connection to Service Bus Queue
-            Client = QueueClient.CreateFromConnectionString(connectionString, QueueName);
+            Client = SubscriptionClient.CreateFromConnectionString(connectionString, "errorlogcollectiontopic", "AllMessages", ReceiveMode.ReceiveAndDelete);
+            Client.Receive();
+            
             IsStopped = false;
             return base.OnStart();
         }
