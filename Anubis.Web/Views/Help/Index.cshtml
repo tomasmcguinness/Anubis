@@ -1,37 +1,97 @@
 ﻿@{
-    ViewBag.Title = "Getting Started";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewBag.Title = "Getting Started";
+  Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style type="text/css">
-    img {
-        margin: 10px;
-        border: 2px solid #888;
-        padding: 5px;
-    }
+  img
+  {
+    margin: 10px;
+    border: 2px solid #888;
+    padding: 5px;
+  }
 </style>
-<h2>Logging Central Help</h2>
+<h2>Getting Started</h2>
 <p>
-    To get started with LoggingCentral, you must first create a new Application. An application represents
-    your Azure application. Logs generated will stored within that application and will help you manage them.
-    On the Applications page, click the "Add new application" button. This will open a dialog.
+  To get started with LoggingCentral, you must first create a new Application. An
+  application represents
+    your Azure application. Logs generated will stored within that application and
+  will help you manage them.
+    On the Applications page, click the "Add new application" button. This will open
+  a dialog.
 </p>
 <img src="~/Images/Help/AddApplicationDialog.PNG" style="width: 400px;" />
 <p>
-    Once you have added your application, it will in your list of Applications.
+  Once you have added your application, it will in your list of Applications.
 </p>
 <img src="~/Images/Help/ApplicationList.PNG" />
 <p>
-    Select the application you have just added by clicking on its name. Your application will be running within one or several of the Azure 
-    data centres. You must now add the various regions that host your application. Click the "Monitor New Region" and choose the region. Repeast
+  Select the application you have just added by clicking on its name. Your application
+  will be running within one or several of the Azure 
+    data centres. You must now add the various regions that host your application.
+  Click the "Monitor New Region" and choose the region. Repeast
     this process for all the regions you want to monitor.
 </p>
 <img src="~/Images/Help/MonitorNewRegionDialog.PNG" />
 <p>
-    Once you've added a region, you will be able to see the number of log messages generated. As this is a new application and you haven't yet
+  Once you've added a region, you will be able to see the number of log messages generated.
+  As this is a new application and you haven't yet
     integrated LoggingCentral into your app, this will read NO DATA.
 </p>
 <img src="~/Images/Help/RegionMetric.PNG" />
 <p>
-    You're now ready to integrate LoggingCentral into your application so that your log messages will be received and displayed within the LoggingCentral 
+  You're now ready to integrate LoggingCentral into your application so that your
+  log messages will be received and displayed within the LoggingCentral 
     platform.
+</p>
+<h2>Start Logging</h2>
+<p>
+  No that you have added the application and its regions to Logging Central, you must
+  now configure your application to send its logs to Logging Central. At this time
+  only <span style="font-weight: bold">NLog</span> is supported.
+  To get started, you should first note your applications Logging Code. On the Application's
+  page, hit the "App Details" button and not the <span style="font-weight: bold">Application
+    Code</span>.
+</p>
+<img src="~/Images/Help/AppDetailsDialog.PNG" />
+<p>
+  You can add now add the LoggingCentral to the WebSite, WebRole or WorkerRole you
+  want to send logging messages from. Just add the LoggingCentral library from NuGet.
+</p>
+<img src="~/Images/Help/LoggingCentralNuGet.PNG" />
+<p>
+  Next, ensure that NLog has been added to your application. You will need to add
+  a new target. Open the <span style="font-weight: bold">NLog.config</span>. Your
+  target is added like this:
+</p>
+<div class="code">
+  <pre>
+&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" autoReload="true"&gt;
+
+  &lt;!-- This brings in the LoggingCentral library --&gt;
+  &lt;extensions&gt;
+    &lt;add assembly="Anubis.Client"/&gt;
+  &lt;/extensions&gt;
+
+  &lt;!-- This target sends your log messages to LoggingCentral.  --&gt; 
+  &lt;!-- Use the Application Code you noted earlier. --&gt;
+  &lt;targets async="true"&gt;
+    &lt;target xsi:type="AnubisTarget" name="lc" code="1Y4DH7788WS" layout="${message}" /&gt;
+  &lt;/targets&gt;
+
+  &lt;rules&gt;
+    &lt;logger name="*" minlevel="Debug" writeTo="lc" /&gt;
+  &lt;/rules&gt;
+&lt;/nlog&gt;
+    </pre>
+</div>
+<p>
+  With that, all that's left is to invoke NLog using your application. Once you've
+  generated a few logging statements
+  you can refresh your Application's dashboard and you should see messages reported!
+</p>
+<img src="~/Images/Help/RegionMetricWithCount.PNG" />
+<p>
+  Happy Logging and may your logs never be errors!
 </p>
