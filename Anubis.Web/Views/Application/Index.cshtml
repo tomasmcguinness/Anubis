@@ -11,9 +11,7 @@
     </a>
 }
 <p>
-    This is the dashboard for the application.You can see all a count of all logged
-  messages for each 
-    data centre.
+    <a href="@Url.Action("Index","Applications")" class="btn">Back to applications</a>
 </p>
 @{ Html.RenderAction("Regions", new { applicationId = Model.ApplicationId }); }
 <div id="addNewApplicationRegion" class="modal hide" tabindex="-1" role="dialog"

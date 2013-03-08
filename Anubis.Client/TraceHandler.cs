@@ -14,6 +14,9 @@ namespace Anubis.Client
 {
     public class TraceHandler
     {
+        private static string connectionString = "Endpoint=sb://anubis.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=0P3oVJss/4SrHYVgr6SdsLUgjzH9wXec44ODUJtZwWo=";
+        private static TopicClient client = TopicClient.CreateFromConnectionString(connectionString, "errorlogcollectiontopic");
+
         public void SendTraceRecord(string code, string level, string message, string stackTrace)
         {
             Task sendTask = new Task(() => { });
@@ -30,14 +33,11 @@ namespace Anubis.Client
 
         private async Task SendAlarmToAnubis(string code, string level, string message, string strackTrace)
         {
-            string connectionString = "Endpoint=sb://anubis.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=0P3oVJss/4SrHYVgr6SdsLUgjzH9wXec44ODUJtZwWo=";
-
-            TopicClient client = TopicClient.CreateFromConnectionString(connectionString, "ErrorLogCollectionTopic");
-
             LogModel model = new LogModel()
             {
                 Level = level,
-                Message = message
+                Message = message,
+                StackTrace = strackTrace
             };
 
             try
