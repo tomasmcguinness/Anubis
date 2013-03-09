@@ -15,36 +15,21 @@ namespace WorkerRoleWithSBQueue1
 {
     public class WorkerRole : RoleEntryPoint
     {
-<<<<<<< HEAD
         // The name of your queue
         const string QueueName = "errorlogcollectiontopic";
 
         // QueueClient is thread-safe. Recommended that you cache 
         // rather than recreating it on every request
-        SubscriptionClient client;
-        MessageReceiver receiver;
-=======
-        const string QueueName = "Error";
-
         SubscriptionClient Client;
->>>>>>> bfb812525dc523bcaf84f3d7f4dfc57c0fd9f803
         bool IsStopped;
 
         public override void Run()
         {
-<<<<<<< HEAD
-=======
-            
->>>>>>> bfb812525dc523bcaf84f3d7f4dfc57c0fd9f803
             while (!IsStopped)
             {
                 try
                 {
-<<<<<<< HEAD
-                    BrokeredMessage message = client.Receive();
-=======
                     BrokeredMessage message = Client.Receive();
->>>>>>> bfb812525dc523bcaf84f3d7f4dfc57c0fd9f803
 
                     if (message != null)
                     {
@@ -79,15 +64,6 @@ namespace WorkerRoleWithSBQueue1
 
             var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
 
-<<<<<<< HEAD
-            if (!namespaceManager.TopicExists(QueueName))
-            {
-                namespaceManager.CreateTopic(QueueName);
-            }
-
-            // Initialize the connection to Service Bus Queue
-            client = SubscriptionClient.CreateFromConnectionString(connectionString, QueueName, "ErrorLogs");
-=======
             if (!namespaceManager.SubscriptionExists("errorlogcollectiontopic", "AllMessages"))
             {
                 namespaceManager.CreateSubscription("errorlogcollectiontopic", "AllMessages");
@@ -96,8 +72,7 @@ namespace WorkerRoleWithSBQueue1
             // Initialize the connection to Service Bus Queue
             Client = SubscriptionClient.CreateFromConnectionString(connectionString, "errorlogcollectiontopic", "AllMessages", ReceiveMode.ReceiveAndDelete);
             Client.Receive();
-            
->>>>>>> bfb812525dc523bcaf84f3d7f4dfc57c0fd9f803
+
             IsStopped = false;
             return base.OnStart();
         }
@@ -106,11 +81,7 @@ namespace WorkerRoleWithSBQueue1
         {
             // Close the connection to Service Bus Queue
             IsStopped = true;
-<<<<<<< HEAD
-            client.Close();
-=======
             Client.Close();
->>>>>>> bfb812525dc523bcaf84f3d7f4dfc57c0fd9f803
             base.OnStop();
         }
     }
