@@ -11,7 +11,7 @@
     </a>
 }
 <p>
-    <a href="@Url.Action("Index","Applications")" class="btn">Back to applications</a>
+    <a href="@Url.Action("Index", "Applications")" class="btn">Back to applications</a>
 </p>
 @{ Html.RenderAction("Regions", new { applicationId = Model.ApplicationId }); }
 <div id="addNewApplicationRegion" class="modal hide" tabindex="-1" role="dialog"
@@ -22,7 +22,6 @@
         <h3>Add new region</h3>
     </div>
     <div class="modal-body">
-        <<<<<<< HEAD
         <p>
             @using (Html.BeginForm("MonitorRegion", "Application", FormMethod.Post, new { id = "newRegionForm" }))
             {
@@ -42,27 +41,6 @@
         <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
         <button type="button" class="btn btn-primary" onclick="$('#newRegionForm').submit();">
             Monitor Region</button>
-        =======
-      <p>
-          @using (Html.BeginForm("MonitorRegion", "Application", FormMethod.Post, new { id = "newRegionForm" }))
-          {
-              @Html.HiddenFor(m => m.ApplicationId)
-              <label>Azure Regions</label>
-              <select id="selectedRegion" name="selectedRegion">
-                  <option value="10">West US</option>
-                  <option value="20">East US</option>
-                  <option value="30">East Asia</option>
-                  <option value="40">North Europe</option>
-                  <option value="50">West Europe</option>
-              </select>
-          }
-      </p>
-    </div>
-    <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
-        <button type="button" class="btn btn-primary" onclick="$('#newRegionForm').submit();">
-            Add</button>
-        >>>>>>> a6a7a6cc48d7d347f473e0e76ef61f4045f10f9b
     </div>
 </div>
 
