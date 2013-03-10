@@ -34,7 +34,7 @@ namespace Anubis.Client.NLog
 
         private string BuildStackTrace(Exception exp)
         {
-            return exp.Message + "\n" + exp.StackTrace;
+            return string.Format("{0} - [{1}] - {2}", exp.GetType().ToString(), exp.Message, exp.StackTrace);
         }
     }
 }
