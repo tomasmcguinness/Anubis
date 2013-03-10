@@ -40,6 +40,7 @@ namespace Anubis.Web.Controllers
                 {
                     LogLevel = message.LogLevel,
                     Message = message.Message,
+                    StackTrace = message.StackTrace,
                     Timestamp = message.Timestamp
                 });
             }

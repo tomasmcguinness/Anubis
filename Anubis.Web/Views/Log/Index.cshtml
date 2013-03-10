@@ -39,6 +39,7 @@
             <th style="width: 200px;">Date</th>
             <th style="width: 100px;">Level</th>
             <th>Message</th>
+            <th>Stack Trace</th>
         </tr>
     </thead>
     <tbody>
@@ -48,6 +49,7 @@
                 <td>@log.Timestamp</td>
                 <td class="@log.LogLevel">@log.LogLevel.ToUpper()</td>
                 <td>@log.Message</td>
+                <td>@log.StackTrace</td>
             </tr>
         }
     </tbody>

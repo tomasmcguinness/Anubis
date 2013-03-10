@@ -28,15 +28,26 @@ namespace Anubis.Web.Controllers
             {
                 try
                 {
-                    throw new InvalidCastException("Invalid cast for testing");
+                    TestMethodOne();
                 }
                 catch (Exception exp)
                 {
-                    log.Error(message, exp);
+                    log.ErrorException(message, exp);
                 }
             }
 
             return View();
         }
+
+        public void TestMethodOne()
+        {
+            TestMethodTwo();
+        }
+
+        private void TestMethodTwo()
+        {
+            throw new InvalidOperationException("From TestMethodTwo");
+        }
+
     }
 }

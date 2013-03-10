@@ -53,13 +53,14 @@ namespace Anubis.Web.Managers
             TableServiceContext serviceContext = tableClient.GetDataServiceContext();
 
             // Create a new customer entity
-            LogEntity customer1 = new LogEntity(app.OwnerId, app.Code);
-            customer1.Message = log.Message;
-            customer1.Timestamp = DateTime.UtcNow;
-            customer1.LogLevel = log.Level;
+            LogEntity logEntry = new LogEntity(app.OwnerId, app.Code);
+            logEntry.Message = log.Message;
+            logEntry.Timestamp = DateTime.UtcNow;
+            logEntry.LogLevel = log.Level;
+            logEntry.StackTrace = log.StackTrace;
 
             // Add the new customer to the people table
-            serviceContext.AddObject(tableName, customer1);
+            serviceContext.AddObject(tableName, logEntry);
 
             // Submit the operation to the table service
             serviceContext.SaveChanges();
@@ -73,7 +74,7 @@ namespace Anubis.Web.Managers
             string tableName = GetTableName(ownerId);
 
             TableServiceContext serviceContext = tableClient.GetDataServiceContext();
-            return serviceContext.CreateQuery<LogEntity>(tableName).Where(a => a.PartitionKey.CompareTo(applicationCode) == 0).ToList().OrderByDescending(a => a.Timestamp).ToList();
+            return serviceContext.CreateQuery<LogEntity>(tableName).Where(a => a.PartitionKey.CompareTo(applicationCode) == 0).Take(100).ToList().OrderByDescending(a => a.Timestamp).ToList();
         }
 
         private string GetTableName(int ownerId)

@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Anubis.Client</RootNamespace>
-    <AssemblyName>Anubis.Client</AssemblyName>
+    <AssemblyName>LoggingCentral</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -67,7 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="LoggingCentral.0.1.nuspec" />
+    <None Include="LoggingCentral.0.1.nupkg" />
+    <None Include="LoggingCentral.0.3.nupkg" />
+    <None Include="LoggingCentral.0.4.nupkg" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
