@@ -6,16 +6,34 @@ using System.Threading.Tasks;
 
 namespace Anubis.Client.Tracing
 {
-    public class AnubisTraceListener : System.Diagnostics.TraceListener
+    public class LoggingCentralTraceListener : System.Diagnostics.TraceListener
     {
+        private TraceHandler handler;
+        private const string DEFAULT_LOGGGING_LEVEL = "info";
+
+        public LoggingCentralTraceListener()
+        {
+            this.handler = new TraceHandler();
+        }
+
         public override void Write(string message)
         {
-            throw new NotImplementedException();
+            handler.SendTraceRecord(DEFAULT_LOGGGING_LEVEL, message, null);
         }
 
         public override void WriteLine(string message)
         {
-            throw new NotImplementedException();
+            handler.SendTraceRecord(DEFAULT_LOGGGING_LEVEL, message, null);
+        }
+
+        public override void Write(string message, string category)
+        {
+            handler.SendTraceRecord(category, message, null);
+        }
+
+        public override void WriteLine(string message, string category)
+        {
+            handler.SendTraceRecord(category, message, null);
         }
     }
 }

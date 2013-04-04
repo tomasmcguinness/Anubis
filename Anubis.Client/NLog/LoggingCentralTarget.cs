@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Anubis.Client.NLog
 {
-    [Target("AnubisTarget")]
-    public class AnubisTarget : TargetWithLayout
+    [Target("LoggingCentralTarget")]
+    public class LoggingCentralTarget : TargetWithLayout
     {
         private TraceHandler handler;
 
-        public AnubisTarget()
+        public LoggingCentralTarget()
         {
             this.handler = new TraceHandler();
         }

@@ -63,7 +63,7 @@ namespace Anubis.Web.Models
   public class RegisterModel
   {
     [Required]
-    [Display(Name = "User name")]
+    [Display(Name = "Email Address")]
     public string UserName { get; set; }
 
     [Required]

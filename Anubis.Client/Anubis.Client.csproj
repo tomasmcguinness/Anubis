@@ -56,13 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\LogModel.cs" />
-    <Compile Include="NLog\AnubisTarget.cs" />
+    <Compile Include="NLog\LoggingCentralTarget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TraceHandler.cs" />
-    <Compile Include="TraceListener.cs" />
+    <Compile Include="Tracing\TraceListener.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="LoggingCentral.0.1.nupkg" />
     <None Include="LoggingCentral.0.3.nupkg" />
     <None Include="LoggingCentral.0.4.nupkg" />

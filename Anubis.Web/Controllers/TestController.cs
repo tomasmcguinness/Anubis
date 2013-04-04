@@ -48,6 +48,5 @@ namespace Anubis.Web.Controllers
         {
             throw new InvalidOperationException("From TestMethodTwo");
         }
-
     }
 }
