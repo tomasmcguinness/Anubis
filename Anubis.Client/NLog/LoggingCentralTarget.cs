@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Anubis.Client.NLog
+namespace LoggingCentral.Clients.NLog
 {
     [Target("LoggingCentralTarget")]
     public class LoggingCentralTarget : TargetWithLayout

@@ -7,7 +7,7 @@
     <ProjectGuid>{750E35A3-2E64-45BB-8831-9EEACF576A04}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Anubis.Client</RootNamespace>
+    <RootNamespace>LoggingCentral</RootNamespace>
     <AssemblyName>LoggingCentral</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

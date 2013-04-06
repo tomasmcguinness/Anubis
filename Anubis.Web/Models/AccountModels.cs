@@ -48,7 +48,7 @@ namespace Anubis.Web.Models
   public class LoginModel
   {
     [Required]
-    [Display(Name = "User name")]
+    [Display(Name = "Email Address")]
     public string UserName { get; set; }
 
     [Required]

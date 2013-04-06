@@ -7,13 +7,36 @@
 {
     <a class="btn" href="#appDetails" role="button" data-toggle="modal">App Details</a>
     <button class="btn" onclick="refreshMessageCounts()">Refresh</button>
-    <a class="btn btn-primary" href="#addNewApplicationRegion" role="button" data-toggle="modal">Monitor new region
+    <a class="btn btn-primary" href="#addNewApplicationRegion" role="button" data-toggle="modal">Monitor Azure Region
     </a>
 }
-<p>
-    <a href="@Url.Action("Index", "Applications")" class="btn">Back to applications</a>
-</p>
-@{ Html.RenderAction("Regions", new { applicationId = Model.ApplicationId }); }
+@*<p>
+    <a href="@Url.Action("Index", "Applications")" class="btn">Back to all applications</a>
+</p>*@
+@if (Model.HasRegions)
+{
+    //@{ Html.RenderAction("Regions", new { applicationId = Model.ApplicationId }); }
+}
+else
+{
+    <div>
+        <h3>Get Started</h3>
+        <p>You've added a new application, so what's next?</p>
+        <h4>Step 1</h4>
+        First, note your applications unique code, which is <strong>@Model.Code</strong>. You'll need this code to configure your logging. You can view this code at any time
+            by clicking the "App Details" button along the top right.
+            <h4>Step 2</h4>
+        Next, add the LoggingCentral NuGet package into each Visual Studio project you want to capture logging for. The NuGet package includes support for 
+        NLog and System.Diagnostics Tracing. 
+        <h4>Step 3</h4>
+        Monitor each Azure region that your application is deployed into and configure the LoggingCentral to use the local API. This will reduce your data charges, by limiting
+        the amount of data that leaves your region's data centre. Click the "Monitor Azure Region" button along the top.
+        <h4>Done</h4>
+        Once you've deployed your application, you should start seeing your logs flow into LoggingCentral!
+
+    </div>
+}
+
 <div id="addNewApplicationRegion" class="modal hide" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel"
     aria-hidden="true">
