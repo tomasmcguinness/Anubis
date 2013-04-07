@@ -33,7 +33,8 @@ namespace Anubis.Web.Controllers
             {
                 ApplicationId = app.ApplicationId,
                 Name = app.Name,
-                Code = app.Code
+                Code = app.Code,
+                HasRegions = true
             };
 
             return View(model);

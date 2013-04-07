@@ -10,12 +10,9 @@
     <a class="btn btn-primary" href="#addNewApplicationRegion" role="button" data-toggle="modal">Monitor Azure Region
     </a>
 }
-@*<p>
-    <a href="@Url.Action("Index", "Applications")" class="btn">Back to all applications</a>
-</p>*@
 @if (Model.HasRegions)
 {
-    //@{ Html.RenderAction("Regions", new { applicationId = Model.ApplicationId }); }
+    { Html.RenderAction("Regions", new { applicationId = Model.ApplicationId }); }
 }
 else
 {
@@ -61,7 +58,7 @@ else
         </p>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+        <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
         <button type="button" class="btn btn-primary" onclick="$('#newRegionForm').submit();">
             Monitor Region</button>
     </div>
