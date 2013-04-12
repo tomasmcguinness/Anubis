@@ -1,9 +1,13 @@
 ﻿@{
   ViewBag.Title = "Contact";
 }
-<h2>Hello. Come in and close the door.</h2>
+<div class="jumbotron">
+  <h1>Supercharge your Azure Logging</h1>
+</div>
+<h2>Thanks for taking an interest!</h2>
 <p>
-  We're not quite ready to launch Logging Central, but rest assured that we're busy putting the finishing
+  We're not quite ready to launch Logging Central, but rest assured that we're busy
+  putting the finishing
   touches on it! As soon as it's ready we'd love you to come back and check
   it out. If you would like us to send you a reminder of when it's ready, just pop
   your email address in below.
@@ -11,7 +15,7 @@
 <p>
   @using (Html.BeginForm())
   {
-    <input type="text" name="emailAddress" placeholder="Your email address" style="width: 300px;" /><br />
-    <button type="submit" class="btn btn-primary">Remind Me</button>
+    <input type="text" name="emailAddress" placeholder="Your email address" style="width: 300px;" /><button style="margin-left:5px; margin-top:-10px;" type="submit" class="btn btn-primary">Remind Me</button><br />
+    <span>We won't use your email address for anthing other than Logging Central</span><br />
   }
 </p>
