@@ -1,21 +1,32 @@
 ﻿@{
   ViewBag.Title = "Contact";
 }
-<div class="jumbotron">
-  <h1>Supercharge your Azure Logging</h1>
+<h2>Pricing</h2>
+
+<div class="row">
+  <div class="span7">
+    <p>
+      We want to keep the pricing as simple as possible.
+    </p>
+    <span style="font-size: 34px;">£4.99 per app per month
+    </span>
+  </div>
+  <div class="span2">
+    <a href="#" class="btn btn-success btn-large">Sign up now</a>
+  </div>
 </div>
-<h2>Thanks for taking an interest!</h2>
-<p>
-  We're not quite ready to launch Logging Central, but rest assured that we're busy
-  putting the finishing
-  touches on it! As soon as it's ready we'd love you to come back and check
-  it out. If you would like us to send you a reminder of when it's ready, just pop
-  your email address in below.
-</p>
-<p>
-  @using (Html.BeginForm())
-  {
-    <input type="text" name="emailAddress" placeholder="Your email address" style="width: 300px;" /><button style="margin-left:5px; margin-top:-10px;" type="submit" class="btn btn-primary">Remind Me</button><br />
-    <span>We won't use your email address for anthing other than Logging Central</span><br />
-  }
-</p>
+<hr />
+<div class="row">
+  <div class="span3">
+    <h4><i class="icon-calendar"></i> 30 Day Retention</h4>
+    Each of your log messages is held for a total of 30 days.
+  </div>
+  <div class="span3">
+    <h4>10,000 Log Messages</h4>
+    You can log up to 10,000 messages per month which gives you plenty of scope.
+  </div>
+  <div class="span3">
+    <h4><i class="icon-globe"></i> Multiple Regions</h4>
+    Capture logs for multiple Azure regions, helping you narrow down problems.
+  </div>
+</div>

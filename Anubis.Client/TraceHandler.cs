@@ -20,6 +20,12 @@ namespace LoggingCentral
         public void SendTraceRecord(string level, string message, string stackTrace)
         {
             string loggingCode = ConfigurationManager.AppSettings["LoggingCentralCode"];
+
+            if (loggingCode == null || loggingCode.Length == 0)
+            {
+                throw new InvalidOperationException("You must specify the LoggingCentralCode");
+            }
+
             SendTraceRecord(loggingCode, level, message, stackTrace);
         }
 
@@ -56,8 +62,8 @@ namespace LoggingCentral
         {
             HttpClient client = new HttpClient();
 
-            //string url = string.Format("http://anubis-we.azurewebsites.net/api/tracing/{0}", code); // TODO This target depends on where the client is installed.
-            string url = string.Format("http://localhost:82/api/tracing/{0}", code); // TODO This target depends on where the client is installed.
+            string url = string.Format("http://anubis-we.azurewebsites.net/api/tracing/{0}", code); // TODO This target depends on where the client is installed.
+            //string url = string.Format("http://localhost:82/api/tracing/{0}", code); // TODO This target depends on where the client is installed.
 
             LogModel model = new LogModel()
             {

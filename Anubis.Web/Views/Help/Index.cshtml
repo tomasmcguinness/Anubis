@@ -43,12 +43,11 @@
   log messages will be received and displayed within the LoggingCentral 
     platform.
 </p>
-<h2>Start Logging</h2>
+<h2>Installation</h2>
 <p>
   No that you have added the application and its regions to Logging Central, you must
-  now configure your application to send its logs to Logging Central. At this time
-  only <span style="font-weight: bold">NLog</span> is supported.
-  To get started, you should first note your applications Logging Code. On the Application's
+  now configure your application to send its logs to Logging Central. To get started,
+  you should first note your applications Logging Code. On the Application's
   page, hit the "App Details" button and not the <span style="font-weight: bold">Application
     Code</span>.
 </p>
@@ -58,6 +57,8 @@
   want to send logging messages from. Just add the LoggingCentral library from NuGet.
 </p>
 <img src="~/Images/Help/LoggingCentralNuGet.PNG" />
+<h2>Using Diagnostics.Trace</h2>
+
 <p>
   Next, ensure that NLog has been added to your application. You will need to add
   a new target. Open the <span style="font-weight: bold">NLog.config</span>. Your
