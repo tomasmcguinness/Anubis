@@ -11,5 +11,6 @@ namespace Anubis.Web.Models
         public string Message { get; set; }
         public string StackTrace { get; set; }
         public DateTime Timestamp { get; set; }
+        public long Ticks { get; set; }
     }
 }

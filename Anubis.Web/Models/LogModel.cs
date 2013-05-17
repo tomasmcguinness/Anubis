@@ -16,5 +16,8 @@ namespace Anubis.Web.Models
 
         [JsonProperty("stackTrace")]
         public string StackTrace { get; set; }
+
+        [JsonProperty("ticks")]
+        public long Ticks { get; set; }
     }
 }

@@ -53,9 +53,9 @@ namespace Anubis.Web.Managers
             TableServiceContext serviceContext = tableClient.GetDataServiceContext();
 
             // Create a new customer entity
-            LogEntity logEntry = new LogEntity(app.OwnerId, app.Code);
+            LogEntity logEntry = new LogEntity(app.Code, log.Ticks);
             logEntry.Message = log.Message;
-            logEntry.Timestamp = DateTime.UtcNow;
+            logEntry.Timestamp = new DateTime(log.Ticks);
             logEntry.LogLevel = log.Level;
             logEntry.StackTrace = log.StackTrace;
 
@@ -74,7 +74,7 @@ namespace Anubis.Web.Managers
             string tableName = GetTableName(ownerId);
 
             TableServiceContext serviceContext = tableClient.GetDataServiceContext();
-            return serviceContext.CreateQuery<LogEntity>(tableName).Where(a => a.PartitionKey.CompareTo(applicationCode) == 0).Take(100).ToList().OrderByDescending(a => a.Timestamp).ToList();
+            return serviceContext.CreateQuery<LogEntity>(tableName).Where(a => a.PartitionKey.CompareTo(applicationCode) == 0).Take(100).ToList();
         }
 
         private string GetTableName(int ownerId)

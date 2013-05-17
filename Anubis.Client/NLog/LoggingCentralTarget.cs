@@ -29,7 +29,7 @@ namespace LoggingCentral.Clients.NLog
         {
             string logMessage = this.Layout.Render(logEvent);
             string stackTrace = logEvent.Exception != null ? BuildStackTrace(logEvent.Exception) : null;
-            handler.SendTraceRecord(code, logEvent.Level.ToString().ToLower(), logMessage, stackTrace);
+            handler.SendTraceRecord(code, logEvent.Level.ToString().ToLower(), logMessage, stackTrace, DateTime.UtcNow);
         }
 
         private string BuildStackTrace(Exception exp)

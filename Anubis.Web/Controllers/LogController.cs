@@ -38,6 +38,7 @@ namespace Anubis.Web.Controllers
             {
                 model.LogMessages.Add(new LogMessageModel()
                 {
+                    Ticks = long.Parse(message.RowKey),
                     LogLevel = message.LogLevel,
                     Message = message.Message,
                     StackTrace = message.StackTrace,

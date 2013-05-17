@@ -27,7 +27,7 @@
 @section BarButton {
     @using (Html.BeginForm())
     {
-        <button class="btn btn-primary">Refresh</button>
+        <button class="btn btn-primary"><i class="icon-refresh icon-white"></i> Refresh</button>
         <button class="btn btn-delete">Purge</button>
     }
 }
@@ -47,7 +47,7 @@
         @foreach (var log in Model.LogMessages)
         {
             <tr>
-                <td>@log.Timestamp</td>
+                <td>@( new DateTime(DateTime.MaxValue.Ticks - log.Ticks) )</td>
                 <td class="@log.LogLevel">@log.LogLevel.ToUpper()</td>
                 <td>@log.Message</td>
                 <td>@log.StackTrace</td>

@@ -13,15 +13,14 @@ namespace Anubis.Web.Entities
             // NO OP for Table Services        
         }
 
-        public LogEntity(int ownerId, string applicationName)
+        public LogEntity(string applicationName, long ticks)
         {
             this.PartitionKey = applicationName;
-            this.RowKey = string.Format("{0}-{1}", ownerId, DateTime.UtcNow.Ticks);
+            this.RowKey = String.Format("{0:D19}", DateTime.MaxValue.Ticks - ticks);
         }
 
         public string LogLevel { get; set; }
         public string Message { get; set; }
-
         public string StackTrace { get; set; }
     }
 }

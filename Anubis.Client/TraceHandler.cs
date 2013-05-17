@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LoggingCentral
@@ -17,7 +18,11 @@ namespace LoggingCentral
         private static string connectionString = "Endpoint=sb://anubis.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=0P3oVJss/4SrHYVgr6SdsLUgjzH9wXec44ODUJtZwWo=";
         private static TopicClient client = TopicClient.CreateFromConnectionString(connectionString, "errorlogcollectiontopic");
 
-        public void SendTraceRecord(string level, string message, string stackTrace)
+        public TraceHandler()
+        {
+        }
+
+        public void SendTraceRecord(string level, string message, string stackTrace, DateTime dateTime)
         {
             string loggingCode = ConfigurationManager.AppSettings["LoggingCentralCode"];
 
@@ -26,14 +31,12 @@ namespace LoggingCentral
                 throw new InvalidOperationException("You must specify the LoggingCentralCode");
             }
 
-            SendTraceRecord(loggingCode, level, message, stackTrace);
+            SendTraceRecord(loggingCode, level, message, stackTrace, dateTime);
         }
 
-        public void SendTraceRecord(string code, string level, string message, string stackTrace)
+        public void SendTraceRecord(string code, string level, string message, string stackTrace, DateTime dateTime)
         {
-            Task postTask = PostLogToAnubis(code, level, message, stackTrace);
-
-            Task.WaitAll(postTask);
+            Task.Factory.StartNew(() => PostLogToAnubis(code, level, message, stackTrace, dateTime.Ticks));
         }
 
         //private async Task SendAlarmToAnubis(string code, string level, string message, string strackTrace)
@@ -58,7 +61,7 @@ namespace LoggingCentral
         //    }
         //}
 
-        private async Task PostLogToAnubis(string code, string level, string message, string stackTrace)
+        private async Task PostLogToAnubis(string code, string level, string message, string stackTrace, long ticks)
         {
             HttpClient client = new HttpClient();
 
@@ -67,6 +70,7 @@ namespace LoggingCentral
 
             LogModel model = new LogModel()
             {
+                Ticks = ticks,
                 Level = level,
                 Message = message,
                 StackTrace = stackTrace

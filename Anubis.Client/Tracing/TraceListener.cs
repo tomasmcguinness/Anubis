@@ -19,22 +19,22 @@ namespace LoggingCentral.Clients.Trace
 
         public override void Write(string message)
         {
-            handler.SendTraceRecord(DEFAULT_LOGGGING_LEVEL, message, null);
+            handler.SendTraceRecord(DEFAULT_LOGGGING_LEVEL, message, null, DateTime.UtcNow);
         }
 
         public override void WriteLine(string message)
         {
-            handler.SendTraceRecord(DEFAULT_LOGGGING_LEVEL, message, null);
+            handler.SendTraceRecord(DEFAULT_LOGGGING_LEVEL, message, null, DateTime.UtcNow);
         }
 
         public override void Write(string message, string category)
         {
-            handler.SendTraceRecord(category, message, null);
+            handler.SendTraceRecord(category, message, null, DateTime.UtcNow);
         }
 
         public override void WriteLine(string message, string category)
         {
-            handler.SendTraceRecord(category, message, null);
+            handler.SendTraceRecord(category, message, null, DateTime.UtcNow);
         }
     }
 }
