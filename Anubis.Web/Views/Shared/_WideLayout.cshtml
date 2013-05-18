@@ -5,6 +5,7 @@
     <title>@ViewBag.Title</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
 </head>
 @{
     var currentControllerName = ViewContext.RouteData.Values["controller"].ToString().ToLower();
@@ -19,6 +20,7 @@
                 <li><a href="@Url.Action("LogOff", "Account")">Log Off</a></li>
             </ul>
         </div>
+        <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     </div>
     <div style="margin-left: 30px; margin-right: 30px;">
         <div style="width: 100%; margin-bottom: 10px;">

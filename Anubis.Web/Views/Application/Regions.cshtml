@@ -22,7 +22,7 @@ else
         <div style="background: #444; padding: 10px; color: #FFF; font-size: 26px;">@region.Name
         </div>
         <div class="regionLogCount" style="padding:10px; font-size:32px; margin-top:10px;" data-application-id="@region.ApplicationId" data-region-id="@region.RegionId">
-            <span>0</span>
+            <span><i class="icon-ok"></i>&nbsp;HAS DATA</span>
             <img src="~/Images/ajax-loader.gif" />
         </div>
         <div style="padding: 10px;">
@@ -45,10 +45,9 @@ else
 
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("GetNumberOfMessagesForRegion", "Application")',
+                url: '@Url.Action("HasMessagesForRegion", "Application")',
                 data: { applicationId: $(element).data("application-id"), regionId: $(element).data("region-id") }
             }).done(function (msg) {
-                $(element).children("span").html(msg);
                 $(element).children("span").show();
                 $(element).children("img").hide();
             }).error(function () {

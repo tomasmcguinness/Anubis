@@ -82,5 +82,17 @@ namespace Anubis.Web.Managers
             string tableName = string.Format("logs{0}", ownerId);
             return tableName;
         }
+
+        internal bool HasLogMessages(int ownerId, string applicationCode, int regionId)
+        {
+            CloudStorageAccount storageAccount = GetStorageAccountForRegion(regionId);
+            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+
+            string tableName = GetTableName(ownerId);
+
+            TableServiceContext serviceContext = tableClient.GetDataServiceContext();
+            var oneRow = serviceContext.CreateQuery<LogEntity>(tableName).Where(a => a.PartitionKey.CompareTo(applicationCode) == 0).Take(1).ToList();
+            return oneRow.Count == 1;
+        }
     }
 }

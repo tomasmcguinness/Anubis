@@ -62,11 +62,11 @@ namespace Anubis.Web.Controllers
 
         [HttpPost]
         [OutputCache(Duration=0)]
-        public int GetNumberOfMessagesForRegion(long applicationId, int regionId)
+        public bool HasMessagesForRegion(long applicationId, int regionId)
         {
             var app = appManager.GetApplication(applicationId);
-            var messageCount = logManager.GetLogMessageCount(WebSecurity.CurrentUserId, app.Code, regionId);
-            return messageCount;
+            bool hasMessages = logManager.HasLogMessages(WebSecurity.CurrentUserId, app.Code, regionId);
+            return hasMessages;
         }
     }
 }
