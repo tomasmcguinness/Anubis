@@ -15,13 +15,6 @@ namespace LoggingCentral
 {
     public class TraceHandler
     {
-        private static string connectionString = "Endpoint=sb://anubis.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=0P3oVJss/4SrHYVgr6SdsLUgjzH9wXec44ODUJtZwWo=";
-        private static TopicClient client = TopicClient.CreateFromConnectionString(connectionString, "errorlogcollectiontopic");
-
-        public TraceHandler()
-        {
-        }
-
         public void SendTraceRecord(string level, string message, string stackTrace, DateTime dateTime)
         {
             string loggingCode = ConfigurationManager.AppSettings["LoggingCentralCode"];
@@ -38,28 +31,6 @@ namespace LoggingCentral
         {
             Task.Factory.StartNew(() => PostLogToAnubis(code, level, message, stackTrace, dateTime.Ticks));
         }
-
-        //private async Task SendAlarmToAnubis(string code, string level, string message, string strackTrace)
-        //{
-        //    LogModel model = new LogModel()
-        //    {
-        //        Level = level,
-        //        Message = message,
-        //        StackTrace = strackTrace
-        //    };
-
-        //    try
-        //    {
-        //        BrokeredMessage bm = new BrokeredMessage(model);
-        //        bm.Label = "ErrorLogMessage";
-
-        //        client.Send(bm);
-        //    }
-        //    catch
-        //    {
-        //        // NO OP
-        //    }
-        //}
 
         private async Task PostLogToAnubis(string code, string level, string message, string stackTrace, long ticks)
         {
