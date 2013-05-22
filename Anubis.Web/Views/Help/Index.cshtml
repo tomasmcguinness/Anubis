@@ -64,7 +64,7 @@
 <div class="code">
     <pre>
 &lt;appSettings&gt;
-    <add key="LoggingCentralCode" value="[YOUR APPLICATION CODE GOES HERE]"/&gt;
+    &lt;add key="LoggingCentralCode" value="[YOUR APPLICATION CODE GOES HERE]"/&gt;
 &lt;/appSettings&gt;
     </pre>
 </div>
@@ -85,6 +85,10 @@
     &lt;/trace&gt;
 &lt;/system.diagnostics&gt;</pre>
 </div>
+<p>
+    Once you've added the trace listener configuration, your trace statements should start flowing through to LoggingCentral. If you don't receive any messages, 
+    double check that your APPLICATION CODE value is correct.
+</p>
 <h2>Using NLog</h2>
 <p>
     To log to LoggingCentral with NLog requires you to add a new Target. Open your application's <span style="font-weight: bold">NLog.config</span>. Your
